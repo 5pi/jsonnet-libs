@@ -1,5 +1,5 @@
 local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
-local app = import 'lib/app.jsonnet';
+local app = import '../../lib/app.jsonnet';
 
 local default_config = {
   name: 'radarr',

@@ -57,7 +57,7 @@ local grafana =
     },
   },
   prometheus+: (
-    (import 'apps/prometheus/main.libsonnet') +
+    (import '../apps/prometheus/main.libsonnet') +
     {
       _config+:: $._config.prometheus {
         namespace: $._config.namespace,
@@ -73,7 +73,7 @@ local grafana =
   ),
 
   blackbox_exporter: (
-    (import 'apps/blackbox_exporter/main.libsonnet') +
+    (import '../apps/blackbox_exporter/main.libsonnet') +
     {
       _config+:: {
         namespace: $._config.namespace,
@@ -82,7 +82,7 @@ local grafana =
   ).blackbox_exporter,
 
   node_exporter: (
-    (import 'apps/node_exporter/main.libsonnet') +
+    (import '../apps/node_exporter/main.libsonnet') +
     {
       _config+:: {
         namespace: $._config.namespace,

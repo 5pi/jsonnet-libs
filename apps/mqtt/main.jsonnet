@@ -1,9 +1,9 @@
+local app = import '../../lib/app.jsonnet';
 local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
-local app = import 'lib/app.jsonnet';
 
 local default_config = {
   name: 'mqtt',
-  namespace: 'default',
+  namespace: 'home-automation',
   node_selector: {},
   storage_path: '',
   avahi_path: '',
@@ -26,7 +26,7 @@ local default_config = {
         app.withVolumeMixin(k.core.v1.volume.fromHostPath('avahi-services', config.avahi_path), '/etc/avahi/services') else
         {}
     )
-    + app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', $.configmap.metadata.name), '/mosquitto/config') +
+    + app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', config.name), '/mosquitto/config') +
     {
       container+: k.core.v1.container.withPorts([
                     k.core.v1.containerPort.new(1883),
@@ -57,6 +57,6 @@ local default_config = {
           persistence %s
           persistence_location %s
         ||| % [if config.storage_path != '' then 'true' else 'false', config.storage_path],
-      }),
+      }) + k.core.v1.configMap.metadata.withNamespace(config.namespace),
     },
 }

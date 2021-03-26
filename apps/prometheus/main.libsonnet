@@ -13,7 +13,7 @@ local ingress = k.extensions.v1beta1.ingress;
 local ingressRule = ingress.mixin.spec.rulesType;
 local httpIngressPath = ingressRule.mixin.http.pathsType;
 
-local reloader = import 'lib/reloader/main.libsonnet';
+local reloader = import '../../lib/reloader/main.libsonnet';
 
 local prometheus_config = import 'config.libsonnet';
 

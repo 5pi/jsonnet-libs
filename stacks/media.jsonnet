@@ -6,7 +6,7 @@
     plex_env: [],
   },
 
-  plex: (import 'apps/plex/main.jsonnet').new({
+  plex: (import '../apps/plex/main.jsonnet').new({
     local host = 'plex.' + $._config.domain,
     host: host,
     namespace: 'default',  // FIXME: Too lazy to move PVC right now.. $._config.namespace,
@@ -18,7 +18,7 @@
     ],
   }),
 
-  nzbget: (import 'apps/nzbget/main.libsonnet') + {
+  nzbget: (import '../apps/nzbget/main.libsonnet') + {
     _config+:: {
       external_domain: 'nzbget.' + $._config.domain,
       namespace: $._config.namespace,
@@ -28,14 +28,14 @@
     },
   },
 
-  sonarr: (import 'apps/sonarr/main.jsonnet').new({
+  sonarr: (import '../apps/sonarr/main.jsonnet').new({
     namespace: $._config.namespace,
     host: 'sonarr.' + $._config.domain,
     storage_class: $._config.storage_class,
     media_path: $._config.media_path,
   }),
 
-  radarr: (import 'apps/radarr/main.jsonnet').new({
+  radarr: (import '../apps/radarr/main.jsonnet').new({
     namespace: $._config.namespace,
     host: 'radarr.' + $._config.domain,
     storage_class: $._config.storage_class,

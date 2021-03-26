@@ -1,17 +1,21 @@
-# Applies
-The applier converges a Kubernetes cluster to the desired state.
+# jsonnet-lib
+jsonnet libraries to generate Kubernetes manifests and Dockerfiles.
 
+The focus here is more personal and homelab infrastructure but it should be
+adoptable to production environments.
+
+# Status
+- Experimental, everything is subject to change
+- Don't expect this to work for your setup out the box..
+- ..but the experiment is to see if it's possible to make this work for your
+  personal setup as well so...
+- PRs to make it work for your use cases are very welcome!
+
+# Usage
+- Home infrastructure: https://github.com/5pi-home/home
 
 # Conventions
 - `_config` is used for configuration
-
-## Site: root level
-- everything that is been deployed at some site/home/company
-- consists of several stacks
-- yields a map with filename and yaml manifest as string
-Examples:
-- fish's home: `./5pi-home.jsonnet`
-
 
 ## Stack
 - set of applications fullfilling a single purpose
@@ -29,6 +33,7 @@ Examples:
 Examples:
 - Prometheus: `./apps/prometheus`
 - home-assistant: `./apps/home_assistant`
+
 
 # Example hierarchy
 ```
