@@ -1,0 +1,10 @@
+"apiVersion": "v1"
+"data":
+  "mosquitto.conf": |
+    log_dest stdout
+    persistence true
+    persistence_location /data/mqtt
+"kind": "ConfigMap"
+"metadata":
+  "name": "mqtt"
+  "namespace": "home-automation"

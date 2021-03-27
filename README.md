@@ -50,6 +50,11 @@ Examples:
 - `[]` stack
 - `()` app
 
+# El cheapo tests
+Running `./test` will use `test/*.jsonnet` to generate manifests in `test/*/`
+and fail if there is a diff to what is committed. If you're happy with the
+changes, commit them to make the test pass.
+
 # Open Questions
 - Use mixins or functions for lib
 - Do these abstractions make sense?

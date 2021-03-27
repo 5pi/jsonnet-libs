@@ -1,0 +1,62 @@
+"apiVersion": "apps/v1"
+"kind": "Deployment"
+"metadata":
+  "name": "mqtt"
+  "namespace": "home-automation"
+"spec":
+  "replicas": 1
+  "selector":
+    "matchLabels":
+      "name": "mqtt"
+  "template":
+    "metadata":
+      "labels":
+        "name": "mqtt"
+    "spec":
+      "containers":
+      - "image": "eclipse-mosquitto:1.6.7"
+        "lifecycle":
+          "postStart":
+            "exec":
+              "command":
+              - "/bin/sh"
+              - "-euc"
+              - |
+                cat << EOF > /etc/avahi/services/mqtt.service
+                <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+                <service-group>
+                 <name replace-wildcards="yes">Mosquitto MQTT server on %h</name>
+                  <service>
+                   <type>_mqtt._tcp</type>
+                   <port>1883</port>
+                   <txt-record>info=Publish, Publish! Read all about it! mqtt.org</txt-record>
+                  </service>
+                </service-group>
+          "preStop":
+            "exec":
+              "command":
+              - "rm"
+              - "/etc/avahi/services/mqtt.service"
+        "name": "mqtt"
+        "ports":
+        - "containerPort": 1883
+        "volumeMounts":
+        - "mountPath": "/mosquitto/data"
+          "name": "data"
+        - "mountPath": "/etc/avahi/services"
+          "name": "avahi-services"
+        - "mountPath": "/mosquitto/config"
+          "name": "config"
+      "hostNetwork": true
+      "nodeSelector":
+        "kubernetes.io/hostname": "openwrt"
+      "volumes":
+      - "hostPath":
+          "path": "/data/mqtt"
+        "name": "data"
+      - "hostPath":
+          "path": "/etc/avahi/services"
+        "name": "avahi-services"
+      - "configMap":
+          "name": "mqtt"
+        "name": "config"
