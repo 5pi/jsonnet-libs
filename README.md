@@ -49,3 +49,11 @@ Examples:
 - `<>` site
 - `[]` stack
 - `()` app
+
+# Open Questions
+- Use mixins or functions for lib
+- Do these abstractions make sense?
+- Is it okay best practice wise to use 'half a stack' by hiding apps?
+- Name of this lib causes:
+`WARN: cannot link 'github.com/5pi/jsonnet-libs' to '/Users/johannes_ziemke/private/home/vendor/jsonnet-libs', because package
+'github.com/grafana/jsonnet-libs' already uses that name. The absolute import still works`
