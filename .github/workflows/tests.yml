@@ -1,0 +1,15 @@
+name: tests
+on: push
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-20.04
+
+    steps:
+      - id: setup-jsonnet
+        uses: zendesk/setup-jsonnet@v7
+      - run: curl -Lsf https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/v0.4.0/jb-linux-amd64 | sudo install -D -m 755 /dev/stdin /usr/local/bin/jb
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - run: ./test
