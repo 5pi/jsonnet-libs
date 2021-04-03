@@ -1,5 +1,5 @@
 local k = import 'ksonnet.beta.4/k.libsonnet';
-local util = (import 'jsonnet-libs/ksonnet-util/util.libsonnet');
+local util = (import 'github.com/grafana/jsonnet-libs/ksonnet-util/util.libsonnet');
 
 local Container = k.apps.v1.deployment.mixin.spec.template.spec.containersType;
 local Deployment = k.apps.v1.deployment;
@@ -40,7 +40,7 @@ local HTTPIngressPath = IngressRule.mixin.http.pathsType;
        k.core.v1.persistentVolumeClaim.mixin.metadata.withName('nzbget') +
        k.core.v1.persistentVolumeClaim.mixin.metadata.withNamespace($._config.namespace) +
        k.core.v1.persistentVolumeClaim.mixin.spec.withAccessModes('ReadWriteOnce') +
-       k.core.v1.persistentVolumeClaim.mixin.spec.resources.withRequests({storage: '100Gi'}) +
+       k.core.v1.persistentVolumeClaim.mixin.spec.resources.withRequests({ storage: '100Gi' }) +
        k.core.v1.persistentVolumeClaim.mixin.spec.withStorageClassName($._config.storage_class),
 
   deployment:

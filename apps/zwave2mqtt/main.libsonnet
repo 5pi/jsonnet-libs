@@ -1,5 +1,5 @@
 local K = import 'ksonnet.beta.4/k.libsonnet';
-local util = (import 'jsonnet-libs/ksonnet-util/kausal.libsonnet').util;
+local util = (import 'github.com/grafana/jsonnet-libs/ksonnet-util/kausal.libsonnet').util;
 
 local Container = K.apps.v1.deployment.mixin.spec.template.spec.containersType;
 local Deployment = K.apps.v1.deployment;
