@@ -55,8 +55,9 @@ local grafana =
     prometheus+:: {
       node_selector: {},
     },
+    scrape_interval_seconds: 30,
   },
-  prometheus+: (
+  prometheus+:
     (import '../apps/prometheus/main.libsonnet') +
     {
       _config+:: $._config.prometheus {
@@ -70,7 +71,11 @@ local grafana =
         'node.alerting.rules.yaml': std.manifestYamlDoc(node_mixins.prometheusAlerts),
       },
     }
-  ),
+    + {
+      prometheus_config+: {
+        global: { scrape_interval: $._config.scrape_interval_seconds + 's' },
+      },
+    },
 
   blackbox_exporter: (
     (import '../apps/blackbox_exporter/main.libsonnet') +
@@ -86,6 +91,7 @@ local grafana =
     {
       _config+:: {
         namespace: $._config.namespace,
+
       },
     }
   ).node_exporter,
