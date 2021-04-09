@@ -53,8 +53,8 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "master"
+      "version": "a5908bf82b25e1232ac59c83cd43ffe337664669"
     }
   ],
-  "legacyImports": true
+    "legacyImports": true
 }

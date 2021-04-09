@@ -1,10 +1,11 @@
-#/bin/bash
+#!/bin/bash
 set -euo pipefail
+JSONNET=${JSONNET:-jsonnet}
 
 cd tests
-jb update
+# jb update
 for d in *.jsonnet; do
   name=${d%%.jsonnet}
-  jsonnet "$d" -J .. -J vendor -S -c -m $name
+  $JSONNET "$d" -J .. -J vendor -S -c -m "$name"
 done
 git diff --exit-code

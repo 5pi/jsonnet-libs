@@ -13,41 +13,6 @@ local service = k.core.v1.service;
 local servicePort = k.core.v1.service.mixin.spec.portsType;
 
 local node_mixins = import 'node-mixin/mixin.libsonnet';
-local kubernetes_mixins = (import 'kubernetes-mixin/mixin.libsonnet') + {
-  _config+:: {
-    kubeSchedulerSelector: 'kubernetes_name="kube-scheduler"',
-    kubeControllerManagerSelector: 'kubernetes_name="kube-controller-manager"',
-  },
-};
-
-
-local grafana =
-  (import 'grafana/grafana.libsonnet') +
-  {
-    _config+:: {
-      namespace: 'monitoring',
-      versions+:: {
-        grafana: '6.6.0',
-      },
-      prometheus+:: {
-        serviceName: 'prometheus',
-      },
-      grafana+:: {
-        dashboards: (kubernetes_mixins + node_mixins).grafanaDashboards,  // + node_mixins.grafanaDashboards},
-        container: {
-          requests: { memory: '80Mi' },
-          limits: { memory: '80Mi' },
-        },
-        config: {
-          sections: {
-            'auth.anonymous': {
-              enabled: true,
-            },
-          },
-        },
-      },
-    },
-  };
 
 {
   _config+:: {
@@ -57,6 +22,18 @@ local grafana =
     },
     scrape_interval_seconds: 30,
   },
+  node_mixins:: node_mixins {
+    _config+:: {
+      rateInterval: $._config.scrape_interval_seconds * 3 + 's',  // Rate should have 3 data points available
+    },
+  },
+  kubernetes_mixins:: (import 'kubernetes-mixin/mixin.libsonnet') + {
+    _config+:: {
+      kubeSchedulerSelector: 'kubernetes_name="kube-scheduler"',
+      kubeControllerManagerSelector: 'kubernetes_name="kube-controller-manager"',
+    },
+  },
+
   prometheus+:
     (import '../apps/prometheus/main.libsonnet') +
     {
@@ -64,11 +41,11 @@ local grafana =
         namespace: $._config.namespace,
       },
       config_files+: {
-        'kubernetes.recording.rules.yaml': std.manifestYamlDoc(kubernetes_mixins.prometheusRules),
-        'kubernetes.alerting.rules.yaml': std.manifestYamlDoc(kubernetes_mixins.prometheusAlerts),
+        'kubernetes.recording.rules.yaml': std.manifestYamlDoc($.kubernetes_mixins.prometheusRules),
+        'kubernetes.alerting.rules.yaml': std.manifestYamlDoc($.kubernetes_mixins.prometheusAlerts),
 
-        'node.recording.rules.yaml': std.manifestYamlDoc(node_mixins.prometheusRules),
-        'node.alerting.rules.yaml': std.manifestYamlDoc(node_mixins.prometheusAlerts),
+        'node.recording.rules.yaml': std.manifestYamlDoc($.node_mixins.prometheusRules),
+        'node.alerting.rules.yaml': std.manifestYamlDoc($.node_mixins.prometheusAlerts),
       },
     }
     + {
@@ -91,12 +68,39 @@ local grafana =
     {
       _config+:: {
         namespace: $._config.namespace,
-
       },
     }
   ).node_exporter,
 
-  grafana: grafana.grafana {
+  _grafana:: (import 'grafana/grafana.libsonnet') +
+             {
+               _config+:: {
+                 namespace: 'monitoring',
+                 versions+:: {
+                   grafana: '6.6.0',
+                 },
+                 prometheus+:: {
+                   serviceName: 'prometheus',
+                 },
+                 grafana+:: {
+                   dashboards: ($.kubernetes_mixins + $.node_mixins).grafanaDashboards,
+                   container: {
+                     requests: { memory: '80Mi' },
+                     limits: { memory: '80Mi' },
+                   },
+                   config: {
+                     sections: {
+                       'auth.anonymous': {
+                         enabled: true,
+                       },
+                     },
+                   },
+                 },
+               },
+             },
+
+
+  grafana: $._grafana.grafana {
     dashboardDefinitions:: super.dashboardDefinitions,
     ingress: ingress.new() +
              ingress.mixin.metadata.withName('grafana') +
@@ -113,6 +117,6 @@ local grafana =
              ]),
   } + {
     [dashboard.metadata.name]: dashboard
-    for dashboard in grafana.grafana.dashboardDefinitions
+    for dashboard in $._grafana.grafana.dashboardDefinitions
   },
 }
