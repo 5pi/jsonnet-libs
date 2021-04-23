@@ -5,6 +5,8 @@
   "namespace": "home-automation"
 "spec":
   "ports":
-  - "port": 8091
+  - "name": "http"
+    "port": 8091
+    "targetPort": 8091
   "selector":
-    "app": "zwave2mqtt"
+    "name": "zwave2mqtt"

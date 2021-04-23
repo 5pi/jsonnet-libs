@@ -5,6 +5,8 @@
   "namespace": "monitoring"
 "spec":
   "ports":
-  - "port": 9090
+  - "name": "http"
+    "port": 9090
+    "targetPort": 9090
   "selector":
-    "app": "prometheus"
+    "name": "prometheus"

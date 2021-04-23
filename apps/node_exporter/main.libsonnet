@@ -1,38 +1,29 @@
-local k = import 'ksonnet.beta.4/k.libsonnet';
-local container = k.apps.v1.deployment.mixin.spec.template.spec.containersType;
-local DaemonSet = k.apps.v1.daemonSet;
+local app = import '../../lib/app.jsonnet';
+local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 
-local volume = k.apps.v1.deployment.mixin.spec.template.spec.volumesType;
-local containerVolumeMount = container.volumeMountsType;
+local default_config = {
+  name: 'node-exporter',
+  namespace: 'monitoring',
+  port: 9100,
+  uid: 1000,
+  image: 'prom/node-exporter:v1.1.2',
+};
 
 {
-  _config+:: {
-    name: 'node-exporter',
-    namespace: 'monitoring',
-    version: '1.1.2',
-    port: 9100,
-    uid: 1000,
-    image_repo: 'prom/node-exporter',
-  },
-  node_exporter+: {
-    local image = $._config.image_repo + ':v' + $._config.version,
-    local c = container.new($._config.name, image) +
-              container.withArgs(['--path.rootfs=/host']) +
-              container.withVolumeMounts([containerVolumeMount.new("host", "/host")]),
-    local podLabels = { app: $._config.name, name: $._config.name },
-
-    daemonset:
-      DaemonSet.new() +
-      DaemonSet.mixin.metadata.withName($._config.name) +
-      DaemonSet.mixin.metadata.withNamespace($._config.namespace) +
-      DaemonSet.mixin.metadata.withLabels(podLabels) +
-      DaemonSet.mixin.spec.template.metadata.withLabels(podLabels) +
-      DaemonSet.mixin.spec.template.spec.withContainers(c) +
-      DaemonSet.mixin.spec.template.spec.withHostPid(true) +
-      DaemonSet.mixin.spec.template.spec.withHostNetwork(true) +
-      DaemonSet.mixin.spec.template.spec.withVolumes([volume.fromHostPath('host', "/")]) +
-      DaemonSet.mixin.spec.selector.withMatchLabels(podLabels) +
-      DaemonSet.mixin.spec.updateStrategy.rollingUpdate.withMaxUnavailable("100%"),
-
-  }
+  new(opts):
+    local config = default_config + opts;
+    {
+      daemonset: k.apps.v1.daemonSet.new(config.name, containers=[
+                   k.core.v1.container.new(config.name, config.image) +
+                   k.core.v1.container.withArgs(['--path.rootfs=/host']) +
+                   k.core.v1.container.withVolumeMounts([
+                     k.core.v1.volumeMount.new('host', '/host', true),
+                   ]),
+                 ]) +
+                 k.apps.v1.daemonSet.metadata.withNamespace(config.namespace) +
+                 k.apps.v1.daemonSet.spec.updateStrategy.rollingUpdate.withMaxUnavailable('100%') +
+                 k.apps.v1.daemonSet.spec.template.spec.withHostPID(true) +
+                 k.apps.v1.daemonSet.spec.template.spec.withHostNetwork(true) +
+                 k.apps.v1.daemonSet.spec.template.spec.withVolumes([k.core.v1.volume.fromHostPath('host', '/')]),
+    },
 }

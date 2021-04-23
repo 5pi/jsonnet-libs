@@ -1,19 +1,19 @@
 "apiVersion": "apps/v1"
 "kind": "Deployment"
 "metadata":
-  "labels":
-    "app": "prometheus"
   "name": "prometheus"
   "namespace": "monitoring"
 "spec":
   "replicas": 1
   "selector":
     "matchLabels":
-      "app": "prometheus"
+      "name": "prometheus"
+  "strategy":
+    "type": "Recreate"
   "template":
     "metadata":
       "labels":
-        "app": "prometheus"
+        "name": "prometheus"
     "spec":
       "containers":
       - "args":
@@ -27,11 +27,9 @@
         "name": "prometheus"
         "volumeMounts":
         - "mountPath": "/prometheus"
-          "name": "data"
-          "readOnly": false
+          "name": "prometheus"
         - "mountPath": "/etc/prometheus"
           "name": "config"
-          "readOnly": false
       - "args":
         - "-volume-dir"
         - "/volume"
@@ -42,13 +40,12 @@
         "volumeMounts":
         - "mountPath": "/volume"
           "name": "config"
-          "readOnly": false
       "securityContext":
         "fsGroup": 1000
         "runAsUser": 1000
       "serviceAccountName": "prometheus"
       "volumes":
-      - "name": "data"
+      - "name": "prometheus"
         "persistentVolumeClaim":
           "claimName": "prometheus"
       - "configMap":

@@ -39,7 +39,9 @@ local withPVC(name, size, mountPath, class='default') = {
        k.core.v1.persistentVolumeClaim.spec.withAccessModes('ReadWriteOnce') +
        k.core.v1.persistentVolumeClaim.spec.resources.withRequests({ storage: size }) +
        k.core.v1.persistentVolumeClaim.spec.withStorageClassName(class),
-} + withVolumeMixin(k.core.v1.volume.fromPersistentVolumeClaim(name, name), mountPath);
+} + withVolumeMixin(k.core.v1.volume.fromPersistentVolumeClaim(name, name), mountPath) + {
+  deployment+: k.apps.v1.deployment.spec.strategy.withType('Recreate'),
+};
 
 {
   newApp:: newApp,

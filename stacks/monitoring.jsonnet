@@ -1,17 +1,4 @@
-local k = import 'ksonnet.beta.4/k.libsonnet';
-local configMap = k.core.v1.configMap;
-local namespace = k.core.v1.namespace;
-local container = k.apps.v1.deployment.mixin.spec.template.spec.containersType;
-local deployment = k.apps.v1.deployment;
-local ingress = k.extensions.v1beta1.ingress;
-local ingressRule = ingress.mixin.spec.rulesType;
-local httpIngressPath = ingressRule.mixin.http.pathsType;
-local volume = k.apps.v1.deployment.mixin.spec.template.spec.volumesType;
-local containerPort = container.portsType;
-local containerVolumeMount = container.volumeMountsType;
-local service = k.core.v1.service;
-local servicePort = k.core.v1.service.mixin.spec.portsType;
-
+local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 local node_mixins = import 'node-mixin/mixin.libsonnet';
 
 {
@@ -34,43 +21,27 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
     },
   },
 
-  prometheus+:
-    (import '../apps/prometheus/main.libsonnet') +
-    {
-      _config+:: $._config.prometheus {
-        namespace: $._config.namespace,
-      },
-      config_files+: {
-        'kubernetes.recording.rules.yaml': std.manifestYamlDoc($.kubernetes_mixins.prometheusRules),
-        'kubernetes.alerting.rules.yaml': std.manifestYamlDoc($.kubernetes_mixins.prometheusAlerts),
+  prometheus+: (import '../apps/prometheus/main.libsonnet').new($._config.prometheus {
+    namespace: $._config.namespace,
+    files+: {
+      'kubernetes.recording.rules.yaml': std.manifestYamlDoc($.kubernetes_mixins.prometheusRules),
+      'kubernetes.alerting.rules.yaml': std.manifestYamlDoc($.kubernetes_mixins.prometheusAlerts),
 
-        'node.recording.rules.yaml': std.manifestYamlDoc($.node_mixins.prometheusRules),
-        'node.alerting.rules.yaml': std.manifestYamlDoc($.node_mixins.prometheusAlerts),
-      },
-    }
-    + {
-      prometheus_config+: {
-        global: { scrape_interval: $._config.scrape_interval_seconds + 's' },
-      },
+      'node.recording.rules.yaml': std.manifestYamlDoc($.node_mixins.prometheusRules),
+      'node.alerting.rules.yaml': std.manifestYamlDoc($.node_mixins.prometheusAlerts),
     },
+    prometheus_config+: {
+      global: { scrape_interval: $._config.scrape_interval_seconds + 's' },
+    },
+  }),
 
-  blackbox_exporter: (
-    (import '../apps/blackbox_exporter/main.libsonnet') +
-    {
-      _config+:: {
-        namespace: $._config.namespace,
-      },
-    }
-  ).blackbox_exporter,
+  blackbox_exporter: (import '../apps/blackbox_exporter/main.libsonnet').new({
+    namespace: $._config.namespace,
+  }),
 
-  node_exporter: (
-    (import '../apps/node_exporter/main.libsonnet') +
-    {
-      _config+:: {
-        namespace: $._config.namespace,
-      },
-    }
-  ).node_exporter,
+  node_exporter: (import '../apps/node_exporter/main.libsonnet').new({
+    namespace: $._config.namespace,
+  }),
 
   _grafana:: (import 'grafana/grafana.libsonnet') +
              {
@@ -102,17 +73,15 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
 
   grafana: $._grafana.grafana {
     dashboardDefinitions:: super.dashboardDefinitions,
-    ingress: ingress.new() +
-             ingress.mixin.metadata.withName('grafana') +
-             ingress.mixin.metadata.withNamespace($._config.namespace) +
-             ingress.mixin.spec.withRules([
-               ingressRule.new() +
-               ingressRule.withHost($._config.grafana.external_domain) +
-               ingressRule.mixin.http.withPaths([
-                 httpIngressPath.new() +
-                 httpIngressPath.withPath('/') +
-                 httpIngressPath.mixin.backend.withServiceName('grafana') +
-                 httpIngressPath.mixin.backend.withServicePort(3000),
+    ingress: k.networking.v1.ingress.new('grafana') +
+             k.networking.v1.ingress.metadata.withNamespace($._config.namespace) +
+             k.networking.v1.ingress.spec.withRules([
+               k.networking.v1.ingressRule.withHost($._config.grafana.external_domain) +
+               k.networking.v1.ingressRule.http.withPaths([
+                 k.networking.v1.httpIngressPath.withPath('/') +
+                 k.networking.v1.httpIngressPath.withPathType('Prefix') +
+                 k.networking.v1.httpIngressPath.backend.service.withName('grafana') +
+                 k.networking.v1.httpIngressPath.backend.service.port.withNumber(3000),
                ]),
              ]),
   } + {

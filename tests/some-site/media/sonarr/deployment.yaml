@@ -8,6 +8,8 @@
   "selector":
     "matchLabels":
       "name": "sonarr"
+  "strategy":
+    "type": "Recreate"
   "template":
     "metadata":
       "labels":

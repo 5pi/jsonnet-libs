@@ -1,1 +1,1 @@
-import 'github.com/ksonnet/ksonnet-lib/ksonnet.beta.4/k.libsonnet'
+import 'github.com/ksonnet/ksonnet-lib/github.com/jsonnet-libs/k8s-alpha/1.19'

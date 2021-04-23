@@ -5,6 +5,8 @@
   "namespace": "media"
 "spec":
   "ports":
-  - "port": 6789
+  - "name": "http"
+    "port": 6789
+    "targetPort": 6789
   "selector":
-    "app": "nzbget"
+    "name": "nzbget"

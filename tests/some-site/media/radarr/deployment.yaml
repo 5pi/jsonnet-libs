@@ -8,6 +8,8 @@
   "selector":
     "matchLabels":
       "name": "radarr"
+  "strategy":
+    "type": "Recreate"
   "template":
     "metadata":
       "labels":

@@ -1,22 +1,20 @@
 "apiVersion": "apps/v1"
 "kind": "Deployment"
 "metadata":
-  "labels":
-    "app": "home-assistant"
   "name": "home-assistant"
   "namespace": "home-assistant"
 "spec":
   "replicas": 1
   "selector":
     "matchLabels":
-      "app": "home-assistant"
+      "name": "home-assistant"
   "template":
     "metadata":
       "labels":
-        "app": "home-assistant"
+        "name": "home-assistant"
     "spec":
       "containers":
-      - "args":
+      - "command":
         - "python3"
         - "-m"
         - "homeassistant"
@@ -32,12 +30,11 @@
           "privileged": true
         "volumeMounts":
         - "mountPath": "/config"
-          "name": "data"
-          "readOnly": false
+          "name": "config"
       "hostNetwork": true
       "nodeSelector":
         "kubernetes.io/hostname": "rpi-living"
       "volumes":
       - "hostPath":
           "path": "/data/home-assistant"
-        "name": "data"
+        "name": "config"

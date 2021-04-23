@@ -1,20 +1,15 @@
 "apiVersion": "apps/v1"
 "kind": "DaemonSet"
 "metadata":
-  "labels":
-    "app": "node-exporter"
-    "name": "node-exporter"
   "name": "node-exporter"
   "namespace": "monitoring"
 "spec":
   "selector":
     "matchLabels":
-      "app": "node-exporter"
       "name": "node-exporter"
   "template":
     "metadata":
       "labels":
-        "app": "node-exporter"
         "name": "node-exporter"
     "spec":
       "containers":
@@ -25,7 +20,7 @@
         "volumeMounts":
         - "mountPath": "/host"
           "name": "host"
-          "readOnly": false
+          "readOnly": true
       "hostNetwork": true
       "hostPID": true
       "volumes":

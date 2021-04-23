@@ -1,7 +1,4 @@
-local k = import 'ksonnet.beta.4/k.libsonnet';
-local container = k.apps.v1.deployment.mixin.spec.template.spec.containersType;
-local containerVolumeMount = container.volumeMountsType;
-local volume = k.apps.v1.deployment.mixin.spec.template.spec.volumesType;
+local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 
 {
   _config+:: {
@@ -10,14 +7,14 @@ local volume = k.apps.v1.deployment.mixin.spec.template.spec.volumesType;
   },
   volume_webhook(volume_name, webhook_url):
     local image = $._config.image_repo + ':v' + $._config.version;
-    local volume_mount = containerVolumeMount.new(volume_name, '/volume');
+    local volume_mount = k.core.v1.volumeMount.new(volume_name, '/volume');
 
-    container.new('reloader', image) +
-    container.withArgs([
+    k.core.v1.container.new('reloader', image) +
+    k.core.v1.container.withArgs([
       '-volume-dir',
       '/volume',
       '-webhook-url',
       webhook_url,
     ]) +
-    container.withVolumeMounts([volume_mount]),
+    k.core.v1.container.withVolumeMounts([volume_mount]),
 }

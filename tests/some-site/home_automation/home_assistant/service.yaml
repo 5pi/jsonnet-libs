@@ -5,6 +5,8 @@
   "namespace": "home-assistant"
 "spec":
   "ports":
-  - "port": 8123
+  - "name": "http"
+    "port": 8123
+    "targetPort": 8123
   "selector":
-    "app": "home-assistant"
+    "name": "home-assistant"
