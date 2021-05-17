@@ -48,7 +48,7 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
                _config+:: {
                  namespace: 'monitoring',
                  versions+:: {
-                   grafana: '6.6.0',
+                   grafana: '7.5.4',
                  },
                  prometheus+:: {
                    serviceName: 'prometheus',
