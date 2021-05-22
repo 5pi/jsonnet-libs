@@ -10,7 +10,7 @@ local default_config = {
   namespace: 'prometheus',
   port: 9090,
   uid: 1000,
-  image: 'prom/prometheus:v2.15.2',
+  image: 'prom/prometheus:v2.27.1',
   host: 'prometheus.example.com',
   external_proto: 'http',
   storage_size: '5Gi',
