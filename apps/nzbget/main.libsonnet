@@ -33,6 +33,7 @@ local default_config = {
       deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector) +
                    k.apps.v1.deployment.spec.template.spec.securityContext.withRunAsUser(config.uid),
       container+: k.core.v1.container.withArgs(['-s', '--configfile=/etc/nzbget/nzbget.conf']),
+      ingress+: k.networking.v1.ingress.metadata.withAnnotations({ 'nginx.ingress.kubernetes.io/proxy-body-size': config.ingress_max_body_size }),
       configmap: k.core.v1.configMap.new(config.name + '-config', { 'nzbget.conf': config.config }) +
                  k.core.v1.configMap.metadata.withNamespace(config.namespace),
     },
