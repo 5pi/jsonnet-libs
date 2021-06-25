@@ -1,9 +1,9 @@
 {
   global: {
-    scrape_interval: '30s'
+    scrape_interval: '30s',
   },
   rule_files: [
-    '/etc/prometheus/*.rules.yaml'
+    '/etc/prometheus/*.rules.yaml',
   ],
   scrape_configs+: [
     {
@@ -128,7 +128,7 @@
         // Drop anything who's service is not kube-state-metrics
         // Rename jobs to be <namespace>/<name, from pod name label>
         {
-          source_labels: ['__meta_kubernetes_pod_label_name'],
+          source_labels: ['__meta_kubernetes_pod_label_app_kubernetes_io_name'],
           regex: 'kube-state-metrics',
           action: 'keep',
         },
@@ -198,7 +198,7 @@
         {
           action: 'keep',
           regex: 'true',
-          source_labels: [ '__meta_kubernetes_service_annotation_prometheus_io_scrape' ],
+          source_labels: ['__meta_kubernetes_service_annotation_prometheus_io_scrape'],
         },
         {
           action: 'labelmap',
@@ -331,7 +331,7 @@
         {
           action: 'keep',
           regex: 'true',
-          source_labels: [ '__meta_kubernetes_service_annotation_prometheus_io_scrape' ],
+          source_labels: ['__meta_kubernetes_service_annotation_prometheus_io_scrape'],
         },
         {
           action: 'labelmap',
