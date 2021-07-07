@@ -88,4 +88,11 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
     [dashboard.metadata.name]: dashboard
     for dashboard in $._grafana.grafana.dashboardDefinitions
   },
+
+  kube_state_metrics: (import 'kube-state-metrics/kube-state-metrics.libsonnet') + {
+    name: 'kube-state-metrics',
+    namespace: $._config.namespace,
+    version: 'v2.0.0',
+    image: 'k8s.gcr.io/kube-state-metrics/kube-state-metrics:' + self.version,
+  },
 }
