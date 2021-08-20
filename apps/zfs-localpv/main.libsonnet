@@ -1,7 +1,7 @@
 local zfs = import '../../contrib/zfs-localpv/main.json';
 local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 
-local version = '1.4.0';
+local version = '1.9.1';
 local driver_image = 'openebs/zfs-driver:' + version;
 
 local nameMap(containers) = { [c.name]: c for c in containers };
