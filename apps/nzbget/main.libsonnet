@@ -5,7 +5,7 @@ local default_config = {
   name: 'nzbget',
   namespace: 'default',
   port: 6789,
-  image: 'fish/nzbget:v21.0',
+  image: 'fish/nzbget:v21.1',
   host: error 'Must specify host',
   media_path: error 'Must specify media_path',
   storage_class: 'default',
