@@ -8,6 +8,7 @@ local default_config = {
   image: 'fish/nzbget:v21.1',
   host: error 'Must specify host',
   media_path: error 'Must specify media_path',
+  cacert_path: '/etc/ssl/certs/ca-certificates.crt',
   storage_class: 'default',
   storage_size: '100Gi',
   uid: 1000,
@@ -28,6 +29,7 @@ local default_config = {
     ) +
     app.withPVC(config.name, config.storage_size, '/nzbget/downloads', config.storage_class) +
     app.withVolumeMixin(k.core.v1.volume.fromHostPath('media', config.media_path), '/media') +
+    app.withVolumeMixin(k.core.v1.volume.fromHostPath('cacerts', config.cacert_path), '/etc/ssl/certs/ca-certificates.crt') +
     app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', config.name + '-config'), '/etc/nzbget') +
     {
       deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector) +
