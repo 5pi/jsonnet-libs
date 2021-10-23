@@ -3,6 +3,7 @@ local cm = import '../../contrib/cert-manager/main.json';
 local default_config = {
   email: 'user@example.com',
   ingress_class: 'nginx',
+  args: [],
 };
 
 local issuer(email, class) = {
@@ -36,5 +37,18 @@ local issuer(email, class) = {
     local config = default_config + user_config;
     cm {
       'cluster-issuer-letsencrypt-staging': issuer(config.email, config.ingress_class),
+      'cert-manager-deployment'+: {
+        spec+: {
+          template+: {
+            spec+: {
+              containers: [
+                cm['cert-manager-deployment'].spec.template.spec.containers[0] {
+                  args+: config.args,
+                },
+              ],
+            },
+          },
+        },
+      },
     },
 }
