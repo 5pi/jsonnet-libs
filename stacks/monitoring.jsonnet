@@ -7,6 +7,7 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
     prometheus+:: {
       node_selector: {},
     },
+    node_exporter+:: {},
     scrape_interval_seconds: 30,
   },
   node_mixins:: node_mixins {
@@ -41,7 +42,7 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
 
   node_exporter: (import '../apps/node_exporter/main.libsonnet').new({
     namespace: $._config.namespace,
-  }),
+  } + $._config.node_exporter),
 
   _grafana:: (import 'grafana/grafana.libsonnet') +
              {
