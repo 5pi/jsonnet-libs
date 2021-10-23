@@ -6,7 +6,8 @@ local default_config = {
   namespace: 'monitoring',
   port: 9100,
   uid: 1000,
-  image: 'prom/node-exporter:v1.1.2',
+  image: 'prom/node-exporter:v1.2.2',
+  args: [],
 };
 
 {
@@ -15,7 +16,7 @@ local default_config = {
     {
       daemonset: k.apps.v1.daemonSet.new(config.name, containers=[
                    k.core.v1.container.new(config.name, config.image) +
-                   k.core.v1.container.withArgs(['--path.rootfs=/host']) +
+                   k.core.v1.container.withArgs(['--path.rootfs=/host'] + config.args) +
                    k.core.v1.container.withVolumeMounts([
                      k.core.v1.volumeMount.new('host', '/host', true),
                    ]),
