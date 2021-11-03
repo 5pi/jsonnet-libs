@@ -1,24 +1,24 @@
 local cm = import '../../contrib/cert-manager/main.json';
+local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 
 local default_config = {
-  email: 'user@example.com',
-  ingress_class: 'nginx',
   args: [],
 };
 
-local issuer(email, class) = {
+local acme_issuer(email, class, env='staging') = {
+  local endpoint = if env == 'production' then 'acme-v02' else 'acme-staging-v02',
   apiVersion: 'cert-manager.io/v1',
   kind: 'ClusterIssuer',
   metadata: {
-    name: 'letsencrypt-staging',
+    name: 'letsencrypt-' + env,
   },
   spec: {
     acme: {
       email: email,
       privateKeySecretRef: {
-        name: 'letsencrypt-staging-account-key',
+        name: 'letsencrypt-' + env + '-account-key',
       },
-      server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
+      server: 'https://' + endpoint + '.api.letsencrypt.org/directory',
       solvers: [
         {
           http01: {
@@ -32,11 +32,19 @@ local issuer(email, class) = {
   },
 };
 
+local withCertManagerTLS(issuer) = {
+  ingress+: k.networking.v1.ingress.spec.withTls(
+    k.networking.v1.ingressTLS.withHosts($.ingress_rule.host) +
+    k.networking.v1.ingressTLS.withSecretName($.ingress_rule.host)
+  ) + k.networking.v1.ingress.metadata.withAnnotations({
+    'cert-manager.io/cluster-issuer': issuer,
+  }),
+};
+
 {
   new(user_config):
     local config = default_config + user_config;
     cm {
-      'cluster-issuer-letsencrypt-staging': issuer(config.email, config.ingress_class),
       'cert-manager-deployment'+: {
         spec+: {
           template+: {
@@ -51,4 +59,6 @@ local issuer(email, class) = {
         },
       },
     },
+  acme_issuer:: acme_issuer,
+  withCertManagerTLS:: withCertManagerTLS,
 }

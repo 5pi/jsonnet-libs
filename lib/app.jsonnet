@@ -49,4 +49,6 @@ local withPVC(name, size, mountPath, class='default') = {
 
   withVolumeMixin:: withVolumeMixin,
   withPVC:: withPVC,
+
+  withCertManagerTLS:: withCertManagerTLS,
 }
