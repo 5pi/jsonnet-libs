@@ -32,14 +32,17 @@ local acme_issuer(email, class, env='staging') = {
   },
 };
 
+local ingressCertManagerTLSMixin(host, issuer) = k.networking.v1.ingress.spec.withTls(
+  k.networking.v1.ingressTLS.withHosts(host) +
+  k.networking.v1.ingressTLS.withSecretName(host)
+) + k.networking.v1.ingress.metadata.withAnnotationsMixin({
+  'cert-manager.io/cluster-issuer': issuer,
+});
+
 local withCertManagerTLS(issuer) = {
-  ingress+: k.networking.v1.ingress.spec.withTls(
-    k.networking.v1.ingressTLS.withHosts($.ingress_rule.host) +
-    k.networking.v1.ingressTLS.withSecretName($.ingress_rule.host)
-  ) + k.networking.v1.ingress.metadata.withAnnotations({
-    'cert-manager.io/cluster-issuer': issuer,
-  }),
+  ingress+: ingressCertManagerTLSMixin(issuer, $.ingress_rule.host),
 };
+
 
 {
   new(user_config):
@@ -60,5 +63,6 @@ local withCertManagerTLS(issuer) = {
       },
     },
   acme_issuer:: acme_issuer,
+  ingressCertManagerTLSMixin: ingressCertManagerTLSMixin,
   withCertManagerTLS:: withCertManagerTLS,
 }
