@@ -40,7 +40,7 @@ local ingressCertManagerTLSMixin(host, issuer) = k.networking.v1.ingress.spec.wi
 });
 
 local withCertManagerTLS(issuer) = {
-  ingress+: ingressCertManagerTLSMixin(issuer, $.ingress_rule.host),
+  ingress+: ingressCertManagerTLSMixin($.ingress_rule.host, issuer),
 };
 
 
