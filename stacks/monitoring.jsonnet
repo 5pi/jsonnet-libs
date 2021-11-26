@@ -9,6 +9,7 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
     },
     node_exporter+:: {},
     scrape_interval_seconds: 30,
+    grafana_config: {},
   },
   node_mixins:: node_mixins {
     _config+:: {
@@ -60,13 +61,7 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
                      requests: { memory: '80Mi' },
                      limits: { memory: '80Mi' },
                    },
-                   config: {
-                     sections: {
-                       'auth.anonymous': {
-                         enabled: true,
-                       },
-                     },
-                   },
+                   config: $._config.grafana_config,
                  },
                },
              },
