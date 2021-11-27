@@ -7,11 +7,11 @@ local newApp(name, image, namespace='default') = {
               k.apps.v1.deployment.metadata.withNamespace(namespace),
 };
 
-local newWebApp(name, image, host, containerPort, namespace='default') = newApp(name, image, namespace) + {
+local withWeb(host, containerPort) = {
   _port:: containerPort,
 
-  service: k.core.v1.service.new(name, $.deployment.spec.template.metadata.labels, k.core.v1.servicePort.newNamed('http', $._port, $._port)) +
-           k.core.v1.service.metadata.withNamespace(namespace),
+  service: k.core.v1.service.new($.deployment.metadata.name, $.deployment.spec.template.metadata.labels, k.core.v1.servicePort.newNamed('http', $._port, $._port)) +
+           k.core.v1.service.metadata.withNamespace($.deployment.metadata.namespace),
 
   ingress_rule:: k.networking.v1.ingressRule.withHost(host) +
                  k.networking.v1.ingressRule.http.withPaths([
@@ -20,11 +20,15 @@ local newWebApp(name, image, host, containerPort, namespace='default') = newApp(
                    k.networking.v1.httpIngressPath.backend.service.withName($.service.metadata.name) +
                    k.networking.v1.httpIngressPath.backend.service.port.withNumber($._port),
                  ]),
-  ingress: k.networking.v1.ingress.new(name) +
+  ingress: k.networking.v1.ingress.new($.deployment.metadata.name) +
            k.networking.v1.ingress.metadata.withNamespace($.deployment.metadata.namespace) +
            k.networking.v1.ingress.spec.withRules([$.ingress_rule]),
-
 };
+
+local newWebApp(name, image, host, containerPort, namespace='default') =
+  newApp(name, image, namespace) +
+  withWeb(host, containerPort);
+
 
 local withVolumeMixin(volume, mountPath, readOnly=false) = {
   deployment+: k.apps.v1.deployment.spec.template.spec.withVolumesMixin(volume),
@@ -48,6 +52,7 @@ local withPVC(name, size, mountPath, class='default') = {
   newWebApp:: newWebApp,
 
   withVolumeMixin:: withVolumeMixin,
+  withWeb:: withWeb,
   withPVC:: withPVC,
 
   withCertManagerTLS:: withCertManagerTLS,
