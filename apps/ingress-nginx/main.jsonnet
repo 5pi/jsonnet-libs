@@ -14,6 +14,7 @@ local default_config = {
       'ingress-nginx-controller-deployment'+:
         k.apps.v1.deployment.spec.strategy.withType('Recreate') +
         k.apps.v1.deployment.spec.template.spec.withHostNetwork(true) +
-        k.apps.v1.deployment.spec.template.spec.withNodeSelectorMixin(config.node_selector),
+        k.apps.v1.deployment.spec.template.spec.withNodeSelectorMixin(config.node_selector) +
+        k.apps.v1.deployment.spec.template.spec.withDnsPolicy('ClusterFirstWithHostNet'),
     } else {},
 }
