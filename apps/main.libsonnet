@@ -11,4 +11,8 @@
   sonarr: import 'sonarr/main.jsonnet',
   'zfs-localpv': import 'zfs-localpv/main.jsonnet',
   zwave2mqtt: import 'zwave2mqtt/main.jsonnet',
+  cert_manager: import 'cert-manager/main.jsonnet',
+  fuse_device_plugin: import 'fuse-device-plugin/main.jsonnet',
+  registry: import 'registry/main.libsonnet',
+  oauth2_proxy: import 'oauth2-proxy/main.libsonnet',
 }
