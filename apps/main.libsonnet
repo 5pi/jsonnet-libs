@@ -15,4 +15,7 @@
   fuse_device_plugin: import 'fuse-device-plugin/main.jsonnet',
   registry: import 'registry/main.libsonnet',
   oauth2_proxy: import 'oauth2-proxy/main.libsonnet',
+  jupyterlab: import 'jupyterlab/main.libsonnet',
+  k8s_webhook_handler: import 'k8s-webhook-handler/main.libsonnet',
+  argo: import 'argo/main.jsonnet',
 }
