@@ -31,6 +31,7 @@ local default_config = {
     app.withVolumeMixin(k.core.v1.volume.fromHostPath('media', config.media_path), '/media') +
     app.withVolumeMixin(k.core.v1.volume.fromHostPath('cacerts', config.cacert_path), '/etc/ssl/certs/ca-certificates.crt') +
     app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', config.name + '-config'), '/etc/nzbget') +
+    app.withFSGroup(config.uid) +
     {
       deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector) +
                    k.apps.v1.deployment.spec.template.spec.securityContext.withRunAsUser(config.uid),

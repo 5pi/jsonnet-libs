@@ -47,6 +47,10 @@ local withPVC(name, size, mountPath, class='default') = {
   deployment+: k.apps.v1.deployment.spec.strategy.withType('Recreate'),
 };
 
+local withFSGroup(fsGroup) = {
+  deployment+: k.apps.v1.deployment.spec.template.spec.securityContext.withFsGroup(fsGroup),
+};
+
 {
   newApp:: newApp,
   newWebApp:: newWebApp,
@@ -54,4 +58,5 @@ local withPVC(name, size, mountPath, class='default') = {
   withVolumeMixin:: withVolumeMixin,
   withWeb:: withWeb,
   withPVC:: withPVC,
+  withFSGroup:: withFSGroup,
 }

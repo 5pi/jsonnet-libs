@@ -1,5 +1,5 @@
-local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 local app = import '../../lib/app.jsonnet';
+local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 
 local default_config = {
   name: 'radarr',
@@ -9,6 +9,7 @@ local default_config = {
   image: 'fish/radarr:0.2.0.1293-0',
   storage_size: '500Mi',
   storage_class: 'default',
+  uid: 1000,  // FIXME: This is hardcoded in the image
 };
 
 {
@@ -22,5 +23,6 @@ local default_config = {
       namespace=config.namespace
     ) +
     app.withPVC(config.name, config.storage_size, '/data', config.storage_class) +
-    app.withVolumeMixin(k.core.v1.volume.fromHostPath('media', config.media_path), '/media'),
+    app.withVolumeMixin(k.core.v1.volume.fromHostPath('media', config.media_path), '/media') +
+    app.withFSGroup(config.uid),
 }
