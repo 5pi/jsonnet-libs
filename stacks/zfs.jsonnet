@@ -7,8 +7,8 @@ local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
   },
   operator: zfs_localpv,
   storage_classes: {
-    [pool]:
-      k.storage.v1.storageClass.new('zfs-' + pool) +
+    [pool.name]:
+      k.storage.v1.storageClass.new(pool.name) +
       k.storage.v1.storageClass.withAllowVolumeExpansion(true) +
       k.storage.v1.storageClass.withProvisioner('zfs.csi.openebs.io') +
       k.storage.v1.storageClass.withParameters({
@@ -17,12 +17,12 @@ local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
         dedup: 'off',
         thinprovision: 'yes',
         fstype: 'zfs',
-        poolname: 'pool-' + pool,
+        poolname: if std.objectHas(pool, 'pool_name') then pool.pool_name else pool.name,
       }) +
       k.storage.v1.storageClass.withAllowedTopologies([{
         matchLabelExpressions: [{
           key: 'kubernetes.io/hostname',
-          values: ['filer'],
+          values: [pool.hostname],
         }],
       }])
     for pool in $._config.pools
