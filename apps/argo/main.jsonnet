@@ -7,6 +7,7 @@ local default_config = {
   namespace: 'argo',
   node_selector: {},
   config: {},
+  server_args: [],
 };
 
 {
@@ -19,7 +20,8 @@ local default_config = {
             template+: {
               spec+: {
                 containers: [argo['argo-server-deployment'].spec.template.spec.containers[0] +
-                             k.core.v1.container.withImage(config.cli_image)],
+                             k.core.v1.container.withImage(config.cli_image) +
+                             k.core.v1.container.withArgs(['server'] + config.server_args)],
               },
             },
           },
