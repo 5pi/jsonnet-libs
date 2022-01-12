@@ -6,11 +6,13 @@ local default_config = {
   namespace: 'ci',
   host: error 'Must define host',
   webhook_secret: error 'Must define secret',
+  github_username: '',
   github_token: error 'Must define github_token',
   image: 'registry.d.42o.de/k8s-webhook-handler:d658524534',
   uid: 1000,
   ca_certificates_path: '/etc/ssl/certs',
   node_selector: {},
+  rbac_rules: [],
 };
 
 {
@@ -27,16 +29,13 @@ local default_config = {
                        k.core.v1.serviceAccount.metadata.withNamespace(config.namespace),
       rbac_role: k.rbac.v1.role.new(config.name) +
                  k.rbac.v1.role.metadata.withNamespace(config.namespace) +
-                 k.rbac.v1.role.withRules(
-                   k.rbac.v1.policyRule.withApiGroups('batch') +
-                   k.rbac.v1.policyRule.withResources('jobs') +
-                   k.rbac.v1.policyRule.withVerbs('create')
-                 ),
+                 k.rbac.v1.role.withRules(config.rbac_rules),
       rbac_role_binding: k.rbac.v1.roleBinding.new(config.name) +
                          k.rbac.v1.roleBinding.metadata.withNamespace(config.namespace) +
                          k.rbac.v1.roleBinding.bindRole(self.rbac_role) +
                          k.rbac.v1.roleBinding.withSubjects(k.rbac.v1.subject.fromServiceAccount(self.service_account)),
       secret: k.core.v1.secret.new(config.name, {
+        'github-username': std.base64(config.github_username),
         'webhook-secret': std.base64(config.webhook_secret),
         'github-token': std.base64(config.github_token),
       }) + k.core.v1.secret.metadata.withNamespace(config.namespace),
