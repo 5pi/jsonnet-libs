@@ -331,11 +331,18 @@
         {
           action: 'keep',
           regex: 'true',
-          source_labels: ['__meta_kubernetes_service_annotation_prometheus_io_scrape'],
+          source_labels: ['__meta_kubernetes_pod_annotation_prometheus_io_scrape'],
         },
         {
           action: 'labelmap',
           regex: '__meta_kubernetes_pod_label_(.+)',
+        },
+        {
+          source_labels: ['__address__', '__meta_kubernetes_pod_annotation_prometheus_io_port'],
+          action: 'replace',
+          regex: '([^:]+)(?::\\d+)?;(\\d+)',
+          replacement: '$1:$2',
+          target_label: '__address__',
         },
         // Rename jobs to be <namespace>/<name, from pod name label>
         {
