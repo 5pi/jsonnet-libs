@@ -57,7 +57,7 @@ local default_config = {
           'rm /tmp/nzbget.run',
           'echo user:x:1000:100:user:/tmp:/bin/sh >> /etc/passwd',
         ]),
-        containerfile.entrypoint(['/nzbget/nzbget']),
+        containerfile.entrypoint(['"/nzbget/nzbget"']),
       ],
       image: image.fromImageName(config.name, config.image, std.join('\n', c)),
     }

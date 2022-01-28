@@ -42,7 +42,7 @@ local default_config = {
           'useradd user',
           'install -d -o user -g user /data',
         ]),
-        containerfile.entrypoint(['mono', '/opt/Radarr/Radarr.exe', '--data=/data/']),
+        containerfile.entrypoint(['"mono"', '"/opt/Radarr/Radarr.exe"', '"--data=/data/"']),
       ],
       image: image.fromImageName(config.name, config.image, std.join('\n', c)),
     }
