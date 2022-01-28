@@ -1,0 +1,9 @@
+"apiVersion": "imagecontroller.k8s.io/v1alpha1"
+"kind": "Image"
+"metadata":
+  "name": "sonarr"
+"spec":
+  "containerfile": "FROM docker.io/mono:6.12\nRUN echo 'APT::Sandbox::User \"root\";' > /etc/apt/apt.conf.d/disable-sandbox && \\\n    apt-get -qy update && \\\n    apt-get -qy install curl libmediainfo0v5 && \\\n    curl -Lsf \"https://download.sonarr.tv/v3/phantom-develop/3.0.1.392/Sonarr.phantom-develop.3.0.1.392.linux.tar.gz\" | tar -C /opt -xzf - && \\\n    useradd user && \\\n    install -d -o user -g user /data\nENTRYPOINT [mono,/opt/Sonarr/Sonarr.exe,--data=/data/]"
+  "registry": "fish"
+  "repository": "sonarr@sha256"
+  "tag": "66dfdb71890123758b154f922825288b272531be759d27f5ca2860a9cebdd2b8"

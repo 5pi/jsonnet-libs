@@ -1,6 +1,5 @@
 local domain = 'example.com';
-local fpl = import 'main.libsonnet';
-
+local fpl = (import 'main.libsonnet');
 local zfs = fpl.stacks.zfs {
   _config+: {
     pools: [
@@ -59,6 +58,9 @@ local ingress_nginx = fpl.apps['ingress-nginx'].new({
 });
 
 fpl.lib.site.render(fpl.lib.site.build({
+  _config:: {
+    render_images: true,
+  },
   zfs: zfs,
   ingress: {
     ingress_nginx: ingress_nginx,

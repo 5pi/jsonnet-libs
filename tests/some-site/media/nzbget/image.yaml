@@ -1,0 +1,9 @@
+"apiVersion": "imagecontroller.k8s.io/v1alpha1"
+"kind": "Image"
+"metadata":
+  "name": "nzbget"
+"spec":
+  "containerfile": "FROM debian:bullseye\nRUN echo 'APT::Sandbox::User \"root\";' > /etc/apt/apt.conf.d/disable-sandbox && \\\n    apt-get -qy update && \\\n    apt-get -qy install curl && \\\n    curl -sLo /tmp/nzbget.run 'https://github.com/nzbget/nzbget/releases/download/v21.1/nzbget-21.1-bin-linux.run' && \\\n    sh /tmp/nzbget.run && \\\n    rm /tmp/nzbget.run && \\\n    echo user:x:1000:100:user:/tmp:/bin/sh >> /etc/passwd\nENTRYPOINT [/nzbget/nzbget]"
+  "registry": "fish"
+  "repository": "nzbget"
+  "tag": "v21.1"

@@ -1,10 +1,15 @@
 local app = import '../../lib/app.jsonnet';
+local containerfile = import '../../lib/containerfile.jsonnet';
+local image = import '../../lib/image.jsonnet';
 local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
 
 local default_config = {
   name: 'nzbget',
   namespace: 'default',
   port: 6789,
+  debian_version: 'bullseye',
+  version: '21.1',
+  dl_url: 'https://github.com/nzbget/nzbget/releases/download/v' + $.version + '/nzbget-' + $.version + '-bin-linux.run',
   image: 'fish/nzbget:v21.1',
   host: error 'Must specify host',
   media_path: error 'Must specify media_path',
@@ -39,5 +44,23 @@ local default_config = {
       ingress+: k.networking.v1.ingress.metadata.withAnnotations({ 'nginx.ingress.kubernetes.io/proxy-body-size': config.ingress_max_body_size }),
       configmap: k.core.v1.configMap.new(config.name + '-config', { 'nzbget.conf': config.config }) +
                  k.core.v1.configMap.metadata.withNamespace(config.namespace),
-    },
+    } +
+    if std.extVar('include_images') == 'true' then {
+      local c = [
+        containerfile.from('debian:' + config.debian_version),
+        containerfile.run([
+          'echo \'APT::Sandbox::User "root";\' > /etc/apt/apt.conf.d/disable-sandbox',
+          'apt-get -qy update',
+          'apt-get -qy install curl',
+          "curl -sLo /tmp/nzbget.run '%s'" % config.dl_url,
+          'sh /tmp/nzbget.run',
+          'rm /tmp/nzbget.run',
+          'echo user:x:1000:100:user:/tmp:/bin/sh >> /etc/passwd',
+        ]),
+        containerfile.entrypoint(['/nzbget/nzbget']),
+      ],
+      image: image.fromImageName(config.name, config.image, std.join('\n', c)),
+    }
+    else {},
+
 }

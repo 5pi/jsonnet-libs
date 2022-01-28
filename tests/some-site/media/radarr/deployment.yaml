@@ -16,7 +16,7 @@
         "name": "radarr"
     "spec":
       "containers":
-      - "image": "fish/radarr:0.2.0.1293-0"
+      - "image": "fish/radarr:0.2.0.1293"
         "name": "radarr"
         "volumeMounts":
         - "mountPath": "/data"

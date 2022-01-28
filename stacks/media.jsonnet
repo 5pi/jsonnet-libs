@@ -4,6 +4,25 @@
     timezone: error 'Must define timezone',
     namespace: 'media',
     plex_env: [],
+    nzbget: {
+      host: 'nzbget.' + $._config.domain,
+      namespace: $._config.namespace,
+      config: (importstr 'media/nzbget.conf') % $._config.usenet,  // FIXME: Lets generate the config from jsonnet
+      storage_class: $._config.storage_class,
+      media_path: $._config.media_path,
+    },
+    sonarr: {
+      namespace: $._config.namespace,
+      host: 'sonarr.' + $._config.domain,
+      storage_class: $._config.storage_class,
+      media_path: $._config.media_path,
+    },
+    radarr: {
+      namespace: $._config.namespace,
+      host: 'radarr.' + $._config.domain,
+      storage_class: $._config.storage_class,
+      media_path: $._config.media_path,
+    },
   },
 
   plex: (import '../apps/plex/main.jsonnet').new({
@@ -18,25 +37,8 @@
     ],
   }),
 
-  nzbget: (import '../apps/nzbget/main.libsonnet').new({
-    host: 'nzbget.' + $._config.domain,
-    namespace: $._config.namespace,
-    config: (importstr 'media/nzbget.conf') % $._config.usenet,  // FIXME: Lets generate the config from jsonnet
-    storage_class: $._config.storage_class,
-    media_path: $._config.media_path,
-  }),
+  nzbget: (import '../apps/nzbget/main.libsonnet').new($._config.nzbget),
 
-  sonarr: (import '../apps/sonarr/main.jsonnet').new({
-    namespace: $._config.namespace,
-    host: 'sonarr.' + $._config.domain,
-    storage_class: $._config.storage_class,
-    media_path: $._config.media_path,
-  }),
-
-  radarr: (import '../apps/radarr/main.jsonnet').new({
-    namespace: $._config.namespace,
-    host: 'radarr.' + $._config.domain,
-    storage_class: $._config.storage_class,
-    media_path: $._config.media_path,
-  }),
+  sonarr: (import '../apps/sonarr/main.jsonnet').new($._config.sonarr),
+  radarr: (import '../apps/radarr/main.jsonnet').new($._config.radarr),
 }

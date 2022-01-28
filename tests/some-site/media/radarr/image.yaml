@@ -1,0 +1,9 @@
+"apiVersion": "imagecontroller.k8s.io/v1alpha1"
+"kind": "Image"
+"metadata":
+  "name": "radarr"
+"spec":
+  "containerfile": "FROM docker.io/mono:6.12\nRUN echo 'APT::Sandbox::User \"root\";' > /etc/apt/apt.conf.d/disable-sandbox && \\\n    apt-get -qy update && \\\n    apt-get -qy install curl libmediainfo0v5 && \\\n    curl -Lsf \"https://github.com/Radarr/Radarr/releases/download/v0.2.0.1293/Radarr.develop.0.2.0.1293.linux.tar.gz\" | tar -C /opt -xzf - && \\\n    chmod -R +r /opt/Radarr/ && \\\n    useradd user && \\\n    install -d -o user -g user /data\nENTRYPOINT [mono,/opt/Radarr/Radarr.exe,--data=/data/]"
+  "registry": "fish"
+  "repository": "radarr"
+  "tag": "0.2.0.1293"
