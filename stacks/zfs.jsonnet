@@ -19,12 +19,14 @@ local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
         fstype: 'zfs',
         poolname: if std.objectHas(pool, 'pool_name') then pool.pool_name else pool.name,
       }) +
-      k.storage.v1.storageClass.withAllowedTopologies([{
-        matchLabelExpressions: [{
-          key: 'kubernetes.io/hostname',
-          values: [pool.hostname],
-        }],
-      }])
+      if std.objectHas(pool, 'hostname') then
+        k.storage.v1.storageClass.withAllowedTopologies([{
+          matchLabelExpressions: [{
+            key: 'kubernetes.io/hostname',
+            values: [pool.hostname],
+          }],
+        }])
+      else {}
     for pool in $._config.pools
   },
 }
