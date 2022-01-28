@@ -19,17 +19,20 @@
       - "args":
         - "-s"
         - "--configfile=/etc/nzbget/nzbget.conf"
-        "image": "fish/nzbget:v21.0"
+        "image": "fish/nzbget:v21.1"
         "name": "nzbget"
         "volumeMounts":
         - "mountPath": "/nzbget/downloads"
           "name": "nzbget"
         - "mountPath": "/media"
           "name": "media"
+        - "mountPath": "/etc/ssl/certs/ca-certificates.crt"
+          "name": "cacerts"
         - "mountPath": "/etc/nzbget"
           "name": "config"
       "nodeSelector": {}
       "securityContext":
+        "fsGroup": 1000
         "runAsUser": 1000
       "volumes":
       - "name": "nzbget"
@@ -38,6 +41,9 @@
       - "hostPath":
           "path": "/pool-mirror/media"
         "name": "media"
+      - "hostPath":
+          "path": "/etc/ssl/certs/ca-certificates.crt"
+        "name": "cacerts"
       - "configMap":
           "name": "nzbget-config"
         "name": "config"

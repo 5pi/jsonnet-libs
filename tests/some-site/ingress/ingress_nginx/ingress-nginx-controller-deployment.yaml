@@ -101,7 +101,7 @@
         - "mountPath": "/usr/local/certificates/"
           "name": "webhook-cert"
           "readOnly": true
-      "dnsPolicy": "ClusterFirst"
+      "dnsPolicy": "ClusterFirstWithHostNet"
       "hostNetwork": true
       "nodeSelector":
         "kubernetes.io/hostname": "openwrt"

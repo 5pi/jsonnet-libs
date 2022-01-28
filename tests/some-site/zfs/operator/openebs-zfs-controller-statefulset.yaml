@@ -39,6 +39,7 @@
         - "--strict-topology"
         - "--leader-election"
         - "--extra-create-metadata=true"
+        - "--default-fstype=ext4"
         "env":
         - "name": "ADDRESS"
           "value": "/var/lib/csi/sockets/pluginproxy/csi.sock"
@@ -87,7 +88,7 @@
           "value": "zfs-operator"
         - "name": "OPENEBS_IO_ENABLE_ANALYTICS"
           "value": "true"
-        "image": "openebs/zfs-driver:1.4.0"
+        "image": "openebs/zfs-driver:1.9.1"
         "imagePullPolicy": "IfNotPresent"
         "name": "openebs-zfs-plugin"
         "volumeMounts":
@@ -101,7 +102,7 @@
         "name": "snapshot-controller"
       "nodeSelector":
         "beta.kubernetes.io/arch": "amd64"
-      "priorityClassName": "system-cluster-critical"
+      "priorityClassName": "openebs-zfs-csi-controller-critical"
       "serviceAccount": "openebs-zfs-controller-sa"
       "volumes":
       - "emptyDir": {}

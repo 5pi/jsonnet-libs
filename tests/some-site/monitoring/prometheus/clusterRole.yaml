@@ -16,7 +16,7 @@
   - "list"
   - "watch"
 - "apiGroups":
-  - "extensions"
+  - "networking"
   "resources":
   - "ingresses"
   "verbs":

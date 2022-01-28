@@ -1,13 +1,8 @@
 "allowVolumeExpansion": true
-"allowedTopologies":
-- "matchLabelExpressions":
-  - "key": "kubernetes.io/hostname"
-    "values":
-    - "filer"
 "apiVersion": "storage.k8s.io/v1"
 "kind": "StorageClass"
 "metadata":
-  "name": "zfs-mirror"
+  "name": "mirror"
 "parameters":
   "compression": "off"
   "dedup": "off"

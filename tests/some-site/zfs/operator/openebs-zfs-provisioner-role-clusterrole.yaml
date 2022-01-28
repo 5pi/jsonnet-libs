@@ -55,6 +55,12 @@
   - "list"
   - "watch"
 - "apiGroups":
+  - "storage.k8s.io"
+  "resources":
+  - "csistoragecapacities"
+  "verbs":
+  - "*"
+- "apiGroups":
   - ""
   "resources":
   - "events"
@@ -100,5 +106,6 @@
   - "zfssnapshots"
   - "zfsbackups"
   - "zfsrestores"
+  - "zfsnodes"
   "verbs":
   - "*"

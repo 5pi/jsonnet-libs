@@ -23,6 +23,8 @@
           "name": "radarr"
         - "mountPath": "/media"
           "name": "media"
+      "securityContext":
+        "fsGroup": 1000
       "volumes":
       - "name": "radarr"
         "persistentVolumeClaim":

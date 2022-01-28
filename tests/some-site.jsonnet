@@ -3,7 +3,17 @@ local fpl = import 'main.libsonnet';
 
 local zfs = fpl.stacks.zfs {
   _config+: {
-    pools: ['mirror', 'stripe-nvme'],
+    pools: [
+      {
+        name: 'mirror',
+        pool_name: 'pool-mirror',
+      },
+      {
+        name: 'stripe-nvme',
+        pool_name: 'pool-stripe-nvme',
+        hostname: 'foo',
+      },
+    ],
   },
 };
 
@@ -48,7 +58,7 @@ local ingress_nginx = fpl.apps['ingress-nginx'].new({
   node_selector: { 'kubernetes.io/hostname': 'openwrt' },
 });
 
-fpl.lib.site.render({
+fpl.lib.site.render(fpl.lib.site.build({
   zfs: zfs,
   ingress: {
     ingress_nginx: ingress_nginx,
@@ -56,4 +66,4 @@ fpl.lib.site.render({
   monitoring: monitoring,
   media: media,
   home_automation: home_automation,
-})
+}))

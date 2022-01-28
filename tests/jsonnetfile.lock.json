@@ -8,8 +8,8 @@
           "subdir": "grafana"
         }
       },
-      "version": "8ea4e7bc04b1bf5e9bd99918ca28c6271b42be0e",
-      "sum": "muenICtKXABk6MZZHCZD2wCbmtiE96GwWRMGa1Rg+wA="
+      "version": "c3b14b24b83cfe9abf1064649d19e2d679f033fb",
+      "sum": "YrE4DNQsWgYWs6h0j/FjQETt8xDXdYdsslb1WK7xQEk="
     },
     {
       "source": {
@@ -18,8 +18,8 @@
           "subdir": "grafonnet"
         }
       },
-      "version": "daad85cf3fad3580e58029414630e29956aefe21",
-      "sum": "zkOBVXtNSGlOdbm5TRCbEik7c/Jk+btbJqaE9qW8j3Y="
+      "version": "3626fc4dc2326931c530861ac5bebe39444f6cbf",
+      "sum": "gF8foHByYcB25jcUOBqP6jxk0OPifQMjPvKY0HaCk6w="
     },
     {
       "source": {
@@ -28,8 +28,8 @@
           "subdir": ""
         }
       },
-      "version": "89299b1c5e93952622801795353d496fb337f44e",
-      "sum": "qCzbUs0WDWsZMaDwyLncqBFO8B+OEVoeIqBW/+ETClQ="
+      "version": "5a128df878434da37969b811e99bb9cd0a3779e3",
+      "sum": "gVuh03hAtRXU/6gLEei1KwlNsTc4VEnT21UB3d+c3TU="
     },
     {
       "source": {
@@ -38,8 +38,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "89299b1c5e93952622801795353d496fb337f44e",
-      "sum": "GRf2GvwEU4jhXV+JOonXSZ4wdDv8mnHBPCQ6TUVd+g8="
+      "version": "5a128df878434da37969b811e99bb9cd0a3779e3",
+      "sum": "0KkygBQd/AFzUvVzezE4qF/uDYgrwUXVpZfINBti0oc="
     },
     {
       "source": {
@@ -48,8 +48,8 @@
           "subdir": "1.19"
         }
       },
-      "version": "50fa5748382fbc0d6fb34105835fd07acaf0195f",
-      "sum": "OXTug8dGtUKG5MGkSdEvMllGfPitqG1kdTk4pPVSH8k="
+      "version": "42e556cf447128d9dc29aae576ae38490aed2648",
+      "sum": "NNhLK4zOVyRgrz8qs714/G+oy7GMn3Q4AbFffD7XkG4="
     },
     {
       "source": {
@@ -68,8 +68,18 @@
           "subdir": "lib/promgrafonnet"
         }
       },
-      "version": "778b1cc035a6785e05ead0a022cd7e6cea4c2059",
+      "version": "c76b9378b86d28bd617d94a57c72b4770efed510",
       "sum": "zv7hXGui6BfHzE9wPatHI/AGZa4A2WKo6pq7ZdqBsps="
+    },
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/kubernetes/kube-state-metrics.git",
+          "subdir": "jsonnet/kube-state-metrics"
+        }
+      },
+      "version": "9ea05e42fb90c1d422eef7ba713eaa4ea77e26e8",
+      "sum": "Aoy8T2dBCSNOBDZ7vE5UK/+vRiFGfP71s37aZoCtqr0="
     },
     {
       "source": {
@@ -78,8 +88,8 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "a5908bf82b25e1232ac59c83cd43ffe337664669",
-      "sum": "sxI7cBEy34JSbB0gHy9xC/ErtFsRzl9eJPsWVqd+XSY="
+      "version": "4f27a4fd8efacdf4f738cf3608dbaee972bbf548",
+      "sum": "MlWDAKGZ+JArozRKdKEvewHeWn8j2DNBzesJfLVd0dk="
     }
   ],
   "legacyImports": false

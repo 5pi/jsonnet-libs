@@ -2,8 +2,9 @@
 set -euo pipefail
 JSONNET=${JSONNET:-jsonnet}
 
+rm -rf tests/some-site/
 cd tests
-# jb update
+jb update
 for d in *.jsonnet; do
   name=${d%%.jsonnet}
   $JSONNET "$d" -J .. -J vendor -S -c -m "$name"

@@ -30,6 +30,7 @@
   - "zfssnapshots"
   - "zfsbackups"
   - "zfsrestores"
+  - "zfsnodes"
   "verbs":
   - "get"
   - "list"

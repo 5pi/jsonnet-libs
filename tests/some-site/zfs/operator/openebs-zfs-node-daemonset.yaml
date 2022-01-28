@@ -50,11 +50,11 @@
         - "mountPath": "/registration"
           "name": "registration-dir"
       - "args":
-        - "--nodeid=$(OPENEBS_NODE_ID)"
+        - "--nodename=$(OPENEBS_NODE_NAME)"
         - "--endpoint=$(OPENEBS_CSI_ENDPOINT)"
         - "--plugin=$(OPENEBS_NODE_DRIVER)"
         "env":
-        - "name": "OPENEBS_NODE_ID"
+        - "name": "OPENEBS_NODE_NAME"
           "valueFrom":
             "fieldRef":
               "fieldPath": "spec.nodeName"
@@ -64,7 +64,7 @@
           "value": "agent"
         - "name": "OPENEBS_NAMESPACE"
           "value": "openebs"
-        "image": "openebs/zfs-driver:1.4.0"
+        "image": "openebs/zfs-driver:1.9.1"
         "imagePullPolicy": "IfNotPresent"
         "name": "openebs-zfs-plugin"
         "securityContext":
@@ -90,7 +90,7 @@
       "hostNetwork": true
       "nodeSelector":
         "beta.kubernetes.io/arch": "amd64"
-      "priorityClassName": "system-node-critical"
+      "priorityClassName": "openebs-zfs-csi-node-critical"
       "serviceAccount": "openebs-zfs-node-sa"
       "volumes":
       - "hostPath":

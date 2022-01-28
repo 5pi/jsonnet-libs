@@ -1,8 +1,8 @@
-"apiVersion": "apiextensions.k8s.io/v1beta1"
+"apiVersion": "apiextensions.k8s.io/v1"
 "kind": "CustomResourceDefinition"
 "metadata":
   "annotations":
-    "controller-gen.kubebuilder.io/version": "v0.2.8"
+    "controller-gen.kubebuilder.io/version": "v0.4.0"
   "creationTimestamp": null
   "name": "zfssnapshots.zfs.openebs.io"
 "spec":
@@ -14,9 +14,7 @@
     "shortNames":
     - "zfssnap"
     "singular": "zfssnapshot"
-  "preserveUnknownFields": false
   "scope": "Namespaced"
-  "version": "v1"
   "versions":
   - "name": "v1"
     "schema":
@@ -24,10 +22,10 @@
         "description": "ZFSSnapshot represents a ZFS Snapshot of the zfsvolume"
         "properties":
           "apiVersion":
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources"
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
             "type": "string"
           "kind":
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds"
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
             "type": "string"
           "metadata":
             "type": "object"
@@ -109,7 +107,7 @@
             - "volumeType"
             "type": "object"
           "status":
-            "description": "SnapStatus string that reflects if the snapshot was cretaed successfully"
+            "description": "SnapStatus string that reflects if the snapshot was created successfully"
             "properties":
               "state":
                 "type": "string"
@@ -126,10 +124,10 @@
         "description": "ZFSSnapshot represents a ZFS Snapshot of the zfsvolume"
         "properties":
           "apiVersion":
-            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources"
+            "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
             "type": "string"
           "kind":
-            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds"
+            "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
             "type": "string"
           "metadata":
             "type": "object"
@@ -205,7 +203,7 @@
             - "volumeType"
             "type": "object"
           "status":
-            "description": "SnapStatus string that reflects if the snapshot was cretaed successfully"
+            "description": "SnapStatus string that reflects if the snapshot was created successfully"
             "properties":
               "state":
                 "type": "string"
