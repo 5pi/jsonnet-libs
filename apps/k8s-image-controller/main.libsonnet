@@ -1,4 +1,4 @@
-local controller = import 'github.com/discordianfish/k8s-image-controller/deploy.libsonnet';
+local controller = import 'github.com/discordianfish/k8s-image-controller/deploy/deploy.libsonnet';
 
 local default_config = {};
 
