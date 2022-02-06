@@ -21,5 +21,8 @@ local default_config = {
     {
       configmap: k.core.v1.configMap.new(config.name, { 'config.yaml': config.config }) +
                  k.core.v1.configMap.metadata.withNamespace(config.namespace),
+
+      service: k.core.v1.service.new(config.name, self.deployment.spec.template.metadata.labels, k.core.v1.servicePort.newNamed('http', config.port, config.port)) +
+               k.core.v1.service.metadata.withNamespace(self.deployment.metadata.namespace),
     },
 }
