@@ -1,11 +1,12 @@
 {
-  new(name, registry, repository, tag, containerfile): {
-    apiVersion: 'imagecontroller.k8s.io/v1alpha1',
+  new(name, registry, repository, tag, containerfile, builderName='podman'): {
+    apiVersion: 'imagecontroller.5pi.de/v1alpha1',
     kind: 'Image',
     metadata: {
       name: name,
     },
     spec: {
+      builderName: builderName,
       registry: registry,
       repository: repository,
       tag: tag,
