@@ -1,5 +1,5 @@
 local argo = import '../../contrib/argo/main.json';
-local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
+local k = import 'k.libsonnet';
 
 local default_config = {
   cli_image: 'quay.io/argoproj/argocli:v3.2.6',

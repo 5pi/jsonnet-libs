@@ -1,5 +1,5 @@
 local ingress = import '../../contrib/ingress-nginx/main.json';
-local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
+local k = import 'k.libsonnet';
 local default_config = {
   host_mode: false,  // host_mode disables the service and runs ingress-nginx on host networking
   node_selector: error 'Must define node_selector when using host_mode',

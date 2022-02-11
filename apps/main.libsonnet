@@ -19,4 +19,5 @@
   k8s_webhook_handler: import 'k8s-webhook-handler/main.libsonnet',
   argo: import 'argo/main.jsonnet',
   k8s_image_controller: import 'k8s-image-controller/main.libsonnet',
+  rclone: import 'rclone/main.libsonnet',
 }
