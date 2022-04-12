@@ -1,4 +1,4 @@
-local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
+local k = import 'k.libsonnet';
 
 {
   _config+:: {

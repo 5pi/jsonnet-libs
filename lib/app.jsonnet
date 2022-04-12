@@ -1,5 +1,4 @@
-local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
-
+local k = import 'k.libsonnet';
 
 local newApp(name, image, namespace='default') = {
   container:: k.core.v1.container.new(name, image),
