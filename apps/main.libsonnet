@@ -21,4 +21,5 @@
   k8s_image_controller: import 'k8s-image-controller/main.libsonnet',
   rclone: import 'rclone/main.libsonnet',
   spotifyd: import 'spotifyd/main.libsonnet',
+  smokeping_exporter: import 'smokeping-exporter/main.libsonnet',
 }
