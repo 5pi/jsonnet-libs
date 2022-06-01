@@ -9,8 +9,8 @@ local default_config = {
   version: '0.3.3',
   node_selector: {},
   debian_version: 'bullseye',
-  image: 'fish/spotifyd:'+$.version,
-  dl_url: 'https://github.com/Spotifyd/spotifyd/releases/download/v'+$.version+'/spotifyd-linux-armv6-slim.tar.gz',
+  image: 'fish/spotifyd:' + $.version,
+  dl_url: 'https://github.com/Spotifyd/spotifyd/releases/download/v' + $.version+'/spotifyd-linux-armv6-slim.tar.gz',
   uid: 1000,
   gid: error 'Must set gid',
 };
