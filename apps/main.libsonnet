@@ -22,4 +22,5 @@
   rclone: import 'rclone/main.libsonnet',
   spotifyd: import 'spotifyd/main.libsonnet',
   smokeping_exporter: import 'smokeping-exporter/main.libsonnet',
+  shairport_sync: import 'shairport-sync/main.libsonnet',
 }
