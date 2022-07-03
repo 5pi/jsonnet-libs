@@ -5,7 +5,7 @@ local default_config = {
   name: 'oauth2-proxy',
   namespace: 'oauth2-proxy',
   port: 4180,
-  image: 'quay.io/oauth2-proxy/oauth2-proxy:v7.2.0',
+  image: 'quay.io/oauth2-proxy/oauth2-proxy:v7.3.0',
   host: error 'Must set host',
   client_id: error 'Must set client_id',
   client_secret: error 'Must set client_secret',
@@ -27,7 +27,12 @@ local default_config = {
       deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector),
       container+: k.core.v1.container.withEnv(k.core.v1.envVar.fromSecretRef('OAUTH2_PROXY_COOKIE_SECRET', self.secret.metadata.name, 'oauth2-proxy-cookie-secret')) +
                   k.core.v1.container.withEnvMap(config.env) +
-                  k.core.v1.container.withArgs(['--client-id=' + config.client_id, '--client-secret-file=' + config.client_secret_file, '--http-address=0.0.0.0:4180'] + config.args),
+                  k.core.v1.container.withArgs([
+                    '--client-id=' + config.client_id,
+                    '--client-secret-file=' + config.client_secret_file,
+                    '--http-address=0.0.0.0:4180',
+                    '--scope=user:email',
+                  ] + config.args),
     } + app.withVolumeMixin(k.core.v1.volume.fromSecret('config', config.name) +
                             k.core.v1.volume.secret.withItems(
                               [{ key: 'oauth2-proxy-client-secret', path: 'client_secret' }]
