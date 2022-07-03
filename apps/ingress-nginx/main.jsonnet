@@ -8,13 +8,15 @@ local default_config = {
 {
   new(user_config):
     local config = default_config + user_config;
-    ingress +
+    ingress {
+      'ingress-nginx-controller-deployment'+:
+        k.apps.v1.deployment.spec.template.spec.withNodeSelectorMixin(config.node_selector),
+    } +
     if config.host_mode then {
       'ingress-nginx-controller-service':: super['ingress-nginx-controller-service'],
       'ingress-nginx-controller-deployment'+:
         k.apps.v1.deployment.spec.strategy.withType('Recreate') +
         k.apps.v1.deployment.spec.template.spec.withHostNetwork(true) +
-        k.apps.v1.deployment.spec.template.spec.withNodeSelectorMixin(config.node_selector) +
         k.apps.v1.deployment.spec.template.spec.withDnsPolicy('ClusterFirstWithHostNet'),
     } else {},
 }
