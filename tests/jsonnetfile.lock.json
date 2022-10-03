@@ -18,8 +18,8 @@
           "subdir": "grafonnet"
         }
       },
-      "version": "6db00c292d3a1c71661fc875f90e0ec7caa538c2",
-      "sum": "gF8foHByYcB25jcUOBqP6jxk0OPifQMjPvKY0HaCk6w="
+      "version": "30280196507e0fe6fa978a3e0eaca3a62844f817",
+      "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
     },
     {
       "source": {
@@ -28,7 +28,7 @@
           "subdir": "grafonnet-7.0"
         }
       },
-      "version": "6db00c292d3a1c71661fc875f90e0ec7caa538c2",
+      "version": "30280196507e0fe6fa978a3e0eaca3a62844f817",
       "sum": "gCtR9s/4D5fxU9aKXg0Bru+/njZhA0YjLjPiASc61FM="
     },
     {
@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "b90502c9f3c9ab9350a4f273e72d1bc93c78466b",
-      "sum": "c3Fjgpv+J7zXXsWxr1UPYMKv1H+qttnpJQNOEs4H5Lc="
+      "version": "2c06399b18ea6d31e61cab450c1a6ef9879a08b8",
+      "sum": "6r++VKHuz2pQWKdPZfuo3zEOgZAi///D1gaicNiOUW4="
     },
     {
       "source": {
@@ -48,8 +48,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "b90502c9f3c9ab9350a4f273e72d1bc93c78466b",
-      "sum": "TieGrr7GyKjURk1+wXHFpdoCiwNaIVfZvyc5mbI9OM0="
+      "version": "2c06399b18ea6d31e61cab450c1a6ef9879a08b8",
+      "sum": "tDR6yT2GVfw0wTU12iZH+m01HrbIr6g/xN+/8nzNkU0="
     },
     {
       "source": {
@@ -58,8 +58,8 @@
           "subdir": "1.23"
         }
       },
-      "version": "d6084da1436dd617670601f825f61c0e3c5e6567",
-      "sum": "XkdI+aZtsQVFOEz/iScvIPC7zOBVUgaFHM1/2fU6S2U="
+      "version": "610803705e9ec295ef2e4eeaa6b2f8fc1419e5b1",
+      "sum": "rBaPsUP7HESyUWi6dAxgP+B2lLXESQ4Qm0qwsM9X/vc="
     },
     {
       "source": {
@@ -78,8 +78,8 @@
           "subdir": "jsonnet/kube-state-metrics"
         }
       },
-      "version": "0c6afa9ea383253f92cfc7a76353bce2b10bf395",
-      "sum": "P0dCnbzyPScQGNXwXRcwiPkMLeTq0IPNbSTysDbySnM="
+      "version": "12402a564cbf4557763079ab8e6e995d9afb4db9",
+      "sum": "evJ+PXRzuM1tezCG5WzpAn4Lk3YJfMvDFcs+45fsscU="
     },
     {
       "source": {
@@ -88,8 +88,8 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "e22382c5ec22ca0d1434155051ed0786a26ff98e",
-      "sum": "+ZeoFzdjV7GKrrs0Bf6a+M+QDikd5QhcxTnFRObA0/w="
+      "version": "d9b2634324aa93a4b680f732359185eb02528ab7",
+      "sum": "tappaHscNBSJCA6ypSWt7DDhohIOkxNjcLFRb3WKpu4="
     }
   ],
   "legacyImports": false
