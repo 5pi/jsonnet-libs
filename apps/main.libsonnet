@@ -24,4 +24,5 @@
   smokeping_exporter: import 'smokeping-exporter/main.libsonnet',
   shairport_sync: import 'shairport-sync/main.libsonnet',
   pulseaudio: import 'pulseaudio/main.libsonnet',
+  alertmanager: import 'alertmanager/main.libsonnet',
 }
