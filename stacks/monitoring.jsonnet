@@ -1,6 +1,8 @@
 local k = import 'k.libsonnet';
 local node_mixins = import 'node-mixin/mixin.libsonnet';
 
+local grafana = import 'grafana/grafana.libsonnet';
+
 {
   _config+:: {
     namespace: 'monitoring',
@@ -9,7 +11,19 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
     },
     node_exporter+:: {},
     scrape_interval_seconds: 30,
-    grafana_config: {},
+    grafana+:: {
+      namespace: $._config.namespace,
+      dashboards+: ($.kubernetes_mixins + $.node_mixins).grafanaDashboards,
+      datasources: [{
+        name: 'prometheus',
+        type: 'prometheus',
+        access: 'proxy',
+        orgId: 1,
+        url: 'http://prometheus.' + $._config.namespace + '.svc:9090',
+        version: 1,
+        editable: false,
+      }],
+    },
   },
   node_mixins:: node_mixins {
     _config+:: {
@@ -45,30 +59,7 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
     namespace: $._config.namespace,
   } + $._config.node_exporter),
 
-  _grafana:: (import 'grafana/grafana.libsonnet') +
-             {
-               _config+:: {
-                 namespace: 'monitoring',
-                 versions+:: {
-                   grafana: '7.5.4',
-                 },
-                 prometheus+:: {
-                   serviceName: 'prometheus',
-                 },
-                 grafana+:: {
-                   dashboards: ($.kubernetes_mixins + $.node_mixins).grafanaDashboards,
-                   container: {
-                     requests: { memory: '80Mi' },
-                     limits: { memory: '80Mi' },
-                   },
-                   config: $._config.grafana_config,
-                 },
-               },
-             },
-
-
-  grafana: $._grafana.grafana {
-    dashboardDefinitions:: super.dashboardDefinitions,
+  grafana: grafana($._config.grafana) {
     ingress: k.networking.v1.ingress.new('grafana') +
              k.networking.v1.ingress.metadata.withNamespace($._config.namespace) +
              k.networking.v1.ingress.spec.withRules([
@@ -80,9 +71,6 @@ local node_mixins = import 'node-mixin/mixin.libsonnet';
                  k.networking.v1.httpIngressPath.backend.service.port.withNumber(3000),
                ]),
              ]),
-  } + {
-    [dashboard.metadata.name]: dashboard
-    for dashboard in $._grafana.grafana.dashboardDefinitions
   },
 
   kube_state_metrics: (import 'kube-state-metrics/kube-state-metrics.libsonnet') + {

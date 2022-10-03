@@ -4,7 +4,7 @@
   "labels":
     "app.kubernetes.io/component": "grafana"
     "app.kubernetes.io/name": "grafana"
-    "app.kubernetes.io/version": "7.5.4"
+    "app.kubernetes.io/version": "7.5.10"
   "name": "grafana"
   "namespace": "monitoring"
 "spec":
@@ -16,16 +16,17 @@
   "template":
     "metadata":
       "annotations":
-        "checksum/grafana-dashboardproviders": "360acf9b14c057ad289a4f07f0e64a3d"
-        "checksum/grafana-datasources": "ac984a134d10d6c22a6eeebcc533b26a"
+        "checksum/grafana-config": "0b4bc821e965a41692e479c834f333d4"
+        "checksum/grafana-dashboardproviders": "6c4764b07da2355bf6445f5b54afa791"
+        "checksum/grafana-datasources": "ff013812a43d8082d8643f61252b8f13"
       "labels":
         "app.kubernetes.io/component": "grafana"
         "app.kubernetes.io/name": "grafana"
-        "app.kubernetes.io/version": "7.5.4"
+        "app.kubernetes.io/version": "7.5.10"
     "spec":
       "containers":
       - "env": []
-        "image": "docker.io/grafana/grafana:7.5.4"
+        "image": "docker.io/grafana/grafana:7.5.10"
         "name": "grafana"
         "ports":
         - "containerPort": 3000
@@ -41,6 +42,12 @@
           "requests":
             "cpu": "100m"
             "memory": "100Mi"
+        "securityContext":
+          "allowPrivilegeEscalation": false
+          "capabilities":
+            "drop":
+            - "ALL"
+          "readOnlyRootFilesystem": true
         "volumeMounts":
         - "mountPath": "/var/lib/grafana"
           "name": "grafana-storage"
@@ -50,6 +57,9 @@
           "readOnly": false
         - "mountPath": "/etc/grafana/provisioning/dashboards"
           "name": "grafana-dashboards"
+          "readOnly": false
+        - "mountPath": "/tmp"
+          "name": "tmp-plugins"
           "readOnly": false
         - "mountPath": "/grafana-dashboard-definitions/0/apiserver"
           "name": "grafana-dashboard-apiserver"
@@ -117,6 +127,9 @@
         - "mountPath": "/grafana-dashboard-definitions/0/workload-total"
           "name": "grafana-dashboard-workload-total"
           "readOnly": false
+        - "mountPath": "/etc/grafana"
+          "name": "grafana-config"
+          "readOnly": false
       "nodeSelector":
         "kubernetes.io/os": "linux"
       "securityContext":
@@ -133,6 +146,9 @@
       - "configMap":
           "name": "grafana-dashboards"
         "name": "grafana-dashboards"
+      - "emptyDir":
+          "medium": "Memory"
+        "name": "tmp-plugins"
       - "configMap":
           "name": "grafana-dashboard-apiserver"
         "name": "grafana-dashboard-apiserver"
@@ -199,3 +215,6 @@
       - "configMap":
           "name": "grafana-dashboard-workload-total"
         "name": "grafana-dashboard-workload-total"
+      - "name": "grafana-config"
+        "secret":
+          "secretName": "grafana-config"
