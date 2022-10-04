@@ -5,8 +5,8 @@ local default_config = {
   name: 'blackbox-exporter',
   namespace: 'monitoring',
   port: 9115,
-  image: 'prom/blackbox-exporter:v0.16.0',
-  config: std.manifestYamlDoc(import 'config.libsonnet'),
+  image: 'prom/blackbox-exporter:v0.22.0',
+  config: import 'config.libsonnet',
 };
 
 {
@@ -19,7 +19,7 @@ local default_config = {
     ) +
     app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', config.name), '/blackbox-exporter') +
     {
-      configmap: k.core.v1.configMap.new(config.name, { 'config.yaml': config.config }) +
+      configmap: k.core.v1.configMap.new(config.name, { 'config.yaml': std.manifestYamlDoc(config.config) }) +
                  k.core.v1.configMap.metadata.withNamespace(config.namespace),
 
       service: k.core.v1.service.new(config.name, self.deployment.spec.template.metadata.labels, k.core.v1.servicePort.newNamed('http', config.port, config.port)) +
