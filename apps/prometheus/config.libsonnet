@@ -258,13 +258,13 @@
           source_labels: [
             '__meta_kubernetes_namespace',
           ],
-          target_label: 'kubernetes_namespace',
+          target_label: 'namespace',
         },
         {
           source_labels: [
             '__meta_kubernetes_service_name',
           ],
-          target_label: 'kubernetes_name',
+          target_label: 'name',
         },
       ],
     },
@@ -310,13 +310,13 @@
           source_labels: [
             '__meta_kubernetes_namespace',
           ],
-          target_label: 'kubernetes_namespace',
+          target_label: 'namespace',
         },
         {
           source_labels: [
             '__meta_kubernetes_ingress_name',
           ],
-          target_label: 'kubernetes_name',
+          target_label: 'name',
         },
       ],
     },
