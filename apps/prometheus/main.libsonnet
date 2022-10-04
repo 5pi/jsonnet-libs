@@ -65,7 +65,7 @@ local default_config = {
                          ]) +
                          k.rbac.v1.policyRule.withVerbs(['get', 'list', 'watch']);
 
-        local extensionRule = k.rbac.v1.policyRule.withApiGroups(['networking']) +
+        local extensionRule = k.rbac.v1.policyRule.withApiGroups(['networking.k8s.io']) +
                               k.rbac.v1.policyRule.withResources([
                                 'ingresses',
                               ]) +
