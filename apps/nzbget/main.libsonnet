@@ -25,6 +25,7 @@ local default_config = {
 {
   new(opts):
     local config = default_config + opts;
+    local configfile = (importstr 'nzbget.conf') % { config: config.config }; // FIXME: Lets generate the config from jsonnet
     app.newWebApp(
       config.name,
       config.image,
@@ -42,7 +43,7 @@ local default_config = {
                    k.apps.v1.deployment.spec.template.spec.securityContext.withRunAsUser(config.uid),
       container+: k.core.v1.container.withArgs(['-s', '--configfile=/etc/nzbget/nzbget.conf']),
       ingress+: k.networking.v1.ingress.metadata.withAnnotations({ 'nginx.ingress.kubernetes.io/proxy-body-size': config.ingress_max_body_size }),
-      configmap: k.core.v1.configMap.new(config.name + '-config', { 'nzbget.conf': config.config }) +
+      configmap: k.core.v1.configMap.new(config.name + '-config', { 'nzbget.conf': configfile }) +
                  k.core.v1.configMap.metadata.withNamespace(config.namespace),
     } +
     if std.extVar('include_images') == 'true' then {

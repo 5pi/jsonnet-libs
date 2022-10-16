@@ -7,7 +7,7 @@
     nzbget: {
       host: 'nzbget.' + $._config.domain,
       namespace: $._config.namespace,
-      config: (importstr 'media/nzbget.conf') % $._config.usenet,  // FIXME: Lets generate the config from jsonnet
+      config: error 'Must define nzbget.config',
       storage_class: $._config.storage_class,
       media_path: $._config.media_path,
     },
