@@ -24,6 +24,10 @@ local grafana = import 'grafana/grafana.libsonnet';
         editable: false,
       }],
     },
+    blackbox_exporter+:: {
+      namespace: $._config.namespace,
+      node_selector: {},
+    },
   },
   node_mixins:: node_mixins {
     _config+:: {
@@ -51,9 +55,7 @@ local grafana = import 'grafana/grafana.libsonnet';
     },
   }),
 
-  blackbox_exporter: (import '../apps/blackbox_exporter/main.libsonnet').new({
-    namespace: $._config.namespace,
-  }),
+  blackbox_exporter: (import '../apps/blackbox_exporter/main.libsonnet').new($._config.blackbox_exporter),
 
   node_exporter: (import '../apps/node_exporter/main.libsonnet').new({
     namespace: $._config.namespace,
