@@ -4,7 +4,7 @@ JSONNET=${JSONNET:-jsonnet}
 
 rm -rf tests/some-site/
 cd tests
-jb update
+[ -z "${SKIP_UPDATE:-}" ] && jb update
 for d in *.jsonnet; do
   name=${d%%.jsonnet}
   $JSONNET "$d" -J .. -J vendor -S --ext-str include_images=true -c -m "$name"

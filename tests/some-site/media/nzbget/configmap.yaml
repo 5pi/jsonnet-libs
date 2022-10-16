@@ -14,22 +14,6 @@
     ConfigTemplate=${AppDir}/webui/nzbget.conf.template
     RequiredDir=
     CertStore=/etc/ssl/certs/ca-certificates.crt
-    Server1.Active=yes
-    Server1.Name=news.eweka.nl
-    Server1.Level=0
-    Server1.Optional=no
-    Server1.Group=0
-    Server1.Host=news.eweka.nl
-    Server1.Port=563
-    Server1.Username=user
-    Server1.Password=password
-    Server1.JoinGroup=no
-    Server1.Encryption=yes
-    Server1.Cipher=ECDHE-RSA-AES256-GCM-SHA384
-    Server1.Connections=20
-    Server1.Retention=0
-    Server1.IpVersion=auto
-    Server1.Notes=
     ControlIP=0.0.0.0
     ControlPort=6789
     ControlUsername=nzbget
@@ -133,6 +117,7 @@
     ScriptPauseQueue=no
     ShellOverride=
     EventInterval=0
+    
 "kind": "ConfigMap"
 "metadata":
   "name": "nzbget-config"

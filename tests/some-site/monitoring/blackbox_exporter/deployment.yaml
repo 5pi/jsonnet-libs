@@ -14,7 +14,9 @@
         "name": "blackbox-exporter"
     "spec":
       "containers":
-      - "image": "prom/blackbox-exporter:v0.16.0"
+      - "args":
+        - "--config.file=/blackbox-exporter/config.yaml"
+        "image": "prom/blackbox-exporter:v0.22.0"
         "name": "blackbox-exporter"
         "volumeMounts":
         - "mountPath": "/blackbox-exporter"

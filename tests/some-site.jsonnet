@@ -27,6 +27,10 @@ local media = fpl.stacks.media {
       server1_password: 'password',
     },
 
+    nzbget+: {
+      config: '',
+    },
+
     timezone: 'Europe/Berlin',
     plex_env: [{ name: 'PLEX_CLAIM', value: 'foo' }],
   },

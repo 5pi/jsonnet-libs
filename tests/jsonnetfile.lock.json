@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "2c06399b18ea6d31e61cab450c1a6ef9879a08b8",
-      "sum": "6r++VKHuz2pQWKdPZfuo3zEOgZAi///D1gaicNiOUW4="
+      "version": "d73aff453c9784cd6922119f3ce33d8d355a79e1",
+      "sum": "KVTD8nKcaYJlB9/orCuBsupMB94wlLaqK9ER4TnsYOc="
     },
     {
       "source": {
@@ -48,7 +48,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "2c06399b18ea6d31e61cab450c1a6ef9879a08b8",
+      "version": "d73aff453c9784cd6922119f3ce33d8d355a79e1",
       "sum": "tDR6yT2GVfw0wTU12iZH+m01HrbIr6g/xN+/8nzNkU0="
     },
     {
@@ -78,7 +78,7 @@
           "subdir": "jsonnet/kube-state-metrics"
         }
       },
-      "version": "12402a564cbf4557763079ab8e6e995d9afb4db9",
+      "version": "b909c01c644517b0f7b66cbf29489eb24636162b",
       "sum": "evJ+PXRzuM1tezCG5WzpAn4Lk3YJfMvDFcs+45fsscU="
     },
     {
@@ -88,7 +88,7 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "d9b2634324aa93a4b680f732359185eb02528ab7",
+      "version": "98a40bd712eaeb1fd3ee60ca37e4091c503d8e1c",
       "sum": "tappaHscNBSJCA6ypSWt7DDhohIOkxNjcLFRb3WKpu4="
     }
   ],

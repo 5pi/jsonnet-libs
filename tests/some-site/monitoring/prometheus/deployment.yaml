@@ -23,7 +23,7 @@
         - "--web.enable-lifecycle"
         - "--web.enable-admin-api"
         - "--web.external-url=http://prometheus.example.com"
-        "image": "prom/prometheus:v2.27.1"
+        "image": "prom/prometheus:v2.38.0"
         "name": "prometheus"
         "volumeMounts":
         - "mountPath": "/prometheus"
