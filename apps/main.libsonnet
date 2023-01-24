@@ -25,4 +25,5 @@
   shairport_sync: import 'shairport-sync/main.libsonnet',
   pulseaudio: import 'pulseaudio/main.libsonnet',
   alertmanager: import 'alertmanager/main.libsonnet',
+  minio: import 'minio/main.libsonnet',
 }
