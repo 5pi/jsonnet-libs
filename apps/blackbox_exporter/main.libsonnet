@@ -5,7 +5,7 @@ local default_config = {
   name: 'blackbox-exporter',
   namespace: 'monitoring',
   port: 9115,
-  image: 'prom/blackbox-exporter:v0.22.0',
+  image: 'prom/blackbox-exporter:v0.23.0',
   config: std.parseYaml(importstr 'config.yaml'),
 };
 
