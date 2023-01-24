@@ -26,4 +26,5 @@
   pulseaudio: import 'pulseaudio/main.libsonnet',
   alertmanager: import 'alertmanager/main.libsonnet',
   minio: import 'minio/main.libsonnet',
+  prosafe_exporter: import 'prosafe-exporter/main.libsonnet',
 }
