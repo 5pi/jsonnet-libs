@@ -6,7 +6,7 @@ local default_config = {
   namespace: 'jupyter',
   host: error 'Must define host',
   host_path: error 'Must define media_path',
-  image: 'jupyter/base-notebook:2022-10-13',
+  image: 'jupyter/base-notebook:2023-01-30',
   node_selector: {},
   data_path: '/data',
 };
