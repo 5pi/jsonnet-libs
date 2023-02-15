@@ -19,8 +19,10 @@ local default_config = {
     ) +
     app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', config.name), '/blackbox-exporter') +
     {
-      container+:: k.core.v1.container.withArgs(["--config.file=/blackbox-exporter/config.yaml"]),
-      configmap: k.core.v1.configMap.new(config.name, { 'config.yaml': std.manifestYamlDoc(config.config) }) +
+      local this = self,
+      config+:: std.manifestYamlDoc(config.config),
+      container+:: k.core.v1.container.withArgs(['--config.file=/blackbox-exporter/config.yaml']),
+      configmap: k.core.v1.configMap.new(config.name, { 'config.yaml': this.config }) +
                  k.core.v1.configMap.metadata.withNamespace(config.namespace),
 
       service: k.core.v1.service.new(config.name, self.deployment.spec.template.metadata.labels, k.core.v1.servicePort.newNamed('http', config.port, config.port)) +
