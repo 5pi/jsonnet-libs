@@ -23,5 +23,8 @@ local default_config = {
     ) +
     app.withVolumeMixin(k.core.v1.volume.fromHostPath('data', config.data_path), '/home/jovyan') + {
       deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector),
+      // We need to override the JUPYER_PORT env var otherwise it clashes with the automatic docker
+      // env variable JUPYER_PORT.
+      container+: k.core.v1.container.withEnvMap({JUPYTER_PORT: '8888'}),
     },
 }
