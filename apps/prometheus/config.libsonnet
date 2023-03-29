@@ -283,12 +283,18 @@
       },
       relabel_configs: [
         {
-          regex: '(.+);(.+);(.+)',
-          replacement: '${1}://${2}${3}',
+          action: 'keep',
+          regex: 'true',
+          source_labels: ['__meta_kubernetes_ingress_annotation_prometheus_io_probe'],
+        },
+        {
+          regex: '(.+);(.+);(.+);(.*)',
+          replacement: '${1}://${2}${3}${4}',
           source_labels: [
             '__meta_kubernetes_ingress_scheme',
             '__address__',
             '__meta_kubernetes_ingress_path',
+            '__meta_kubernetes_ingress_annotation_prometheus_io_suffix',
           ],
           target_label: '__param_target',
         },
