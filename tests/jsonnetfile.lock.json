@@ -18,7 +18,7 @@
           "subdir": "grafonnet"
         }
       },
-      "version": "30280196507e0fe6fa978a3e0eaca3a62844f817",
+      "version": "f0b70307b8e5f12236b277883d998af129a8211f",
       "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
     },
     {
@@ -28,7 +28,7 @@
           "subdir": "grafonnet-7.0"
         }
       },
-      "version": "30280196507e0fe6fa978a3e0eaca3a62844f817",
+      "version": "f0b70307b8e5f12236b277883d998af129a8211f",
       "sum": "gCtR9s/4D5fxU9aKXg0Bru+/njZhA0YjLjPiASc61FM="
     },
     {
@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "10f4670bd5bc6bdcb3e91ba6a397e37610f2ee94",
-      "sum": "VtPsP63CcB1NK808u8pc1gctkE2dENnpMlz+JrniUO0="
+      "version": "e6874c57272cb2937f15b3b43bcdf8cfb8b0058b",
+      "sum": "o+CcJXSIvAxI44qb8WQFWGFeFbuSNHkGO881cqJyZ7Q="
     },
     {
       "source": {
@@ -48,7 +48,7 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "10f4670bd5bc6bdcb3e91ba6a397e37610f2ee94",
+      "version": "e6874c57272cb2937f15b3b43bcdf8cfb8b0058b",
       "sum": "tDR6yT2GVfw0wTU12iZH+m01HrbIr6g/xN+/8nzNkU0="
     },
     {
@@ -58,8 +58,8 @@
           "subdir": "1.23"
         }
       },
-      "version": "6e68f034db06700bc5456b144b0ee863a7b16ef9",
-      "sum": "fImrHPvqQuwkO524KyqyqfVcDaQ2ESjBjm3U1ciY9jY="
+      "version": "9e5b48eee32913938d3cac30f183b49ecd9fe13a",
+      "sum": "3PWrwiLglLlJPWjtF5d0a/HP55QehRUFyzT5JMcwzew="
     },
     {
       "source": {
@@ -78,8 +78,8 @@
           "subdir": "jsonnet/kube-state-metrics"
         }
       },
-      "version": "1acb4dfdac42588be672d94f6c70e8d3f98d12ec",
-      "sum": "4PJ2ROxODsoYO/1Y70+dgLZVjW5zlfzB+TDpxJBHwaI="
+      "version": "4efc9d1f860ea8dcc26e6de6fbca5e950ef88298",
+      "sum": "igweIVljby6UPCBABsmJq+tf8ncgEL+K6qPN38z33I4="
     },
     {
       "source": {
@@ -88,7 +88,7 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "7f05e312acd828f0c4ddcd194e275c05ffa35992",
+      "version": "6a42c0b0a82caa3bf9526bc80d86f8f5550bf84e",
       "sum": "TwdaTm0Z++diiLyaKAAimmC6hBL7XbrJc0RHhBCpAdU="
     }
   ],

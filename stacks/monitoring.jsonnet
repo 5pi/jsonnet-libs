@@ -34,13 +34,7 @@ local grafana = import 'grafana/grafana.libsonnet';
       rateInterval: $._config.scrape_interval_seconds * 3 + 's',  // Rate should have 3 data points available
     },
   },
-  kubernetes_mixins:: (import 'kubernetes-mixin/mixin.libsonnet') + {
-    _config+:: {
-      kubeSchedulerSelector: 'kubernetes_name="kube-scheduler"',
-      kubeControllerManagerSelector: 'kubernetes_name="kube-controller-manager"',
-    },
-  },
-
+  kubernetes_mixins:: (import 'kubernetes-mixin/mixin.libsonnet'),
   prometheus+: (import '../apps/prometheus/main.libsonnet').new($._config.prometheus {
     namespace: $._config.namespace,
     files+: {
