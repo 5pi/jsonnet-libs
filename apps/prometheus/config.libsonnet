@@ -201,6 +201,13 @@
           source_labels: ['__meta_kubernetes_service_annotation_prometheus_io_scrape'],
         },
         {
+          source_labels: ['__address__', '__meta_kubernetes_service_annotation_prometheus_io_port'],
+          action: 'replace',
+          regex: '([^:]+)(?::\\d+)?;(\\d+)',
+          replacement: '$1:$2',
+          target_label: '__address__',
+        },
+        {
           action: 'labelmap',
           regex: '__meta_kubernetes_service_label_(.+)',
         },
