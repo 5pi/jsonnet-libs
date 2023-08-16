@@ -1,5 +1,5 @@
-local k = import 'k.libsonnet';
 local app = import '../../lib/app.jsonnet';
+local k = import 'k.libsonnet';
 
 local default_config = {
   name: 'plex',
@@ -7,7 +7,7 @@ local default_config = {
   host: error 'Must define host',
   media_path: error 'Must define media_path',
   image: 'plexinc/pms-docker:1.22.0.4163-d8c4875dd',
-  storage_size: '5Gi',
+  storage_size: '10Gi',
   storage_class: 'default',
   host_network: true,
   hostname: 'plex',
