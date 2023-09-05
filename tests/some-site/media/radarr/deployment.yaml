@@ -16,10 +16,10 @@
         "name": "radarr"
     "spec":
       "containers":
-      - "image": "fish/radarr:0.2.0.1293"
+      - "image": "lscr.io/linuxserver/radarr:4.7.5.7809-ls187"
         "name": "radarr"
         "volumeMounts":
-        - "mountPath": "/data"
+        - "mountPath": "/config"
           "name": "radarr"
         - "mountPath": "/media"
           "name": "media"

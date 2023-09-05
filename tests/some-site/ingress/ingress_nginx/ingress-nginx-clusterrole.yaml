@@ -5,7 +5,7 @@
     "app.kubernetes.io/instance": "ingress-nginx"
     "app.kubernetes.io/name": "ingress-nginx"
     "app.kubernetes.io/part-of": "ingress-nginx"
-    "app.kubernetes.io/version": "1.2.1"
+    "app.kubernetes.io/version": "1.8.0"
   "name": "ingress-nginx"
 "rules":
 - "apiGroups":
@@ -17,6 +17,13 @@
   - "pods"
   - "secrets"
   - "namespaces"
+  "verbs":
+  - "list"
+  - "watch"
+- "apiGroups":
+  - "coordination.k8s.io"
+  "resources":
+  - "leases"
   "verbs":
   - "list"
   - "watch"
@@ -63,3 +70,11 @@
   - "get"
   - "list"
   - "watch"
+- "apiGroups":
+  - "discovery.k8s.io"
+  "resources":
+  - "endpointslices"
+  "verbs":
+  - "list"
+  - "watch"
+  - "get"

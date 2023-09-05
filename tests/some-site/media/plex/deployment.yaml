@@ -23,7 +23,7 @@
           "value": "Europe/Berlin"
         - "name": "ADVERTISE_IP"
           "value": "http://plex.example.com:32400/"
-        "image": "plexinc/pms-docker:1.22.0.4163-d8c4875dd"
+        "image": "plexinc/pms-docker:1.32.5.7349-8f4248874"
         "name": "plex"
         "ports":
         - "containerPort": 32469

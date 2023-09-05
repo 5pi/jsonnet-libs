@@ -6,7 +6,7 @@
     "app.kubernetes.io/instance": "ingress-nginx"
     "app.kubernetes.io/name": "ingress-nginx"
     "app.kubernetes.io/part-of": "ingress-nginx"
-    "app.kubernetes.io/version": "1.2.1"
+    "app.kubernetes.io/version": "1.8.0"
   "name": "ingress-nginx-controller"
   "namespace": "ingress-nginx"
 "spec":
@@ -25,11 +25,13 @@
         "app.kubernetes.io/component": "controller"
         "app.kubernetes.io/instance": "ingress-nginx"
         "app.kubernetes.io/name": "ingress-nginx"
+        "app.kubernetes.io/part-of": "ingress-nginx"
+        "app.kubernetes.io/version": "1.8.0"
     "spec":
       "containers":
       - "args":
         - "/nginx-ingress-controller"
-        - "--election-id=ingress-controller-leader"
+        - "--election-id=ingress-nginx-leader"
         - "--controller-class=k8s.io/ingress-nginx"
         - "--ingress-class=nginx"
         - "--configmap=$(POD_NAMESPACE)/ingress-nginx-controller"
@@ -47,7 +49,7 @@
               "fieldPath": "metadata.namespace"
         - "name": "LD_PRELOAD"
           "value": "/usr/local/lib/libmimalloc.so"
-        "image": "k8s.gcr.io/ingress-nginx/controller:v1.2.1@sha256:5516d103a9c2ecc4f026efbd4b40662ce22dc1f824fb129ed121460aaa5c47f8"
+        "image": "registry.k8s.io/ingress-nginx/controller:v1.8.0@sha256:744ae2afd433a395eeb13dc03d3313facba92e96ad71d9feaafc85925493fee3"
         "imagePullPolicy": "IfNotPresent"
         "lifecycle":
           "preStop":

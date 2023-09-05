@@ -20,7 +20,7 @@
         - "homeassistant"
         - "--config"
         - "/config"
-        "image": "homeassistant/home-assistant:2022.4"
+        "image": "homeassistant/home-assistant:2023.8"
         "livenessProbe":
           "httpGet":
             "port": 8123

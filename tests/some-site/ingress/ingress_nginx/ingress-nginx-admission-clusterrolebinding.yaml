@@ -6,7 +6,7 @@
     "app.kubernetes.io/instance": "ingress-nginx"
     "app.kubernetes.io/name": "ingress-nginx"
     "app.kubernetes.io/part-of": "ingress-nginx"
-    "app.kubernetes.io/version": "1.2.1"
+    "app.kubernetes.io/version": "1.8.0"
   "name": "ingress-nginx-admission"
 "roleRef":
   "apiGroup": "rbac.authorization.k8s.io"

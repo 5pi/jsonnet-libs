@@ -18,7 +18,7 @@
           "subdir": "grafonnet"
         }
       },
-      "version": "f0b70307b8e5f12236b277883d998af129a8211f",
+      "version": "a1d61cce1da59c71409b99b5c7568511fec661ea",
       "sum": "342u++/7rViR/zj2jeJOjshzglkZ1SY+hFNuyCBFMdc="
     },
     {
@@ -28,7 +28,7 @@
           "subdir": "grafonnet-7.0"
         }
       },
-      "version": "f0b70307b8e5f12236b277883d998af129a8211f",
+      "version": "a1d61cce1da59c71409b99b5c7568511fec661ea",
       "sum": "gCtR9s/4D5fxU9aKXg0Bru+/njZhA0YjLjPiASc61FM="
     },
     {
@@ -38,8 +38,8 @@
           "subdir": ""
         }
       },
-      "version": "e6874c57272cb2937f15b3b43bcdf8cfb8b0058b",
-      "sum": "o+CcJXSIvAxI44qb8WQFWGFeFbuSNHkGO881cqJyZ7Q="
+      "version": "c0abc546c782a095a22c277d36f871bb94ffc944",
+      "sum": "qhFsu+mtm4caVUqJg4o0oesFjLQ1gYwpXoMO+rmlwj0="
     },
     {
       "source": {
@@ -48,8 +48,8 @@
           "subdir": "grafana-builder"
         }
       },
-      "version": "e6874c57272cb2937f15b3b43bcdf8cfb8b0058b",
-      "sum": "tDR6yT2GVfw0wTU12iZH+m01HrbIr6g/xN+/8nzNkU0="
+      "version": "c0abc546c782a095a22c277d36f871bb94ffc944",
+      "sum": "xEFMv4+ObwP5L1Wu0XK5agWci4AJzNApys6iKAQxLlQ="
     },
     {
       "source": {
@@ -58,7 +58,7 @@
           "subdir": "1.23"
         }
       },
-      "version": "9e5b48eee32913938d3cac30f183b49ecd9fe13a",
+      "version": "44a9f3d21c089a01f62b22e25bdf553f488a74e8",
       "sum": "3PWrwiLglLlJPWjtF5d0a/HP55QehRUFyzT5JMcwzew="
     },
     {
@@ -78,8 +78,8 @@
           "subdir": "jsonnet/kube-state-metrics"
         }
       },
-      "version": "4efc9d1f860ea8dcc26e6de6fbca5e950ef88298",
-      "sum": "igweIVljby6UPCBABsmJq+tf8ncgEL+K6qPN38z33I4="
+      "version": "84abaf71386f0c52c913e6da9002915a09018dce",
+      "sum": "+dOzAK+fwsFf97uZpjcjTcEJEC1H8hh/j8f5uIQK/5g="
     },
     {
       "source": {
@@ -88,8 +88,8 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "c91a8bcee1665f0584d4689905d422d29ecade7e",
-      "sum": "TwdaTm0Z++diiLyaKAAimmC6hBL7XbrJc0RHhBCpAdU="
+      "version": "381f32b1c5943afb35940b88c45c3fa4bf5fc1de",
+      "sum": "By6n6U10hYDogUsyhsaKZehbhzxBZZobJloiKyKadgM="
     }
   ],
   "legacyImports": false
