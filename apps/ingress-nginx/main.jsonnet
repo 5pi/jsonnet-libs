@@ -3,6 +3,7 @@ local k = import 'k.libsonnet';
 local default_config = {
   host_mode: false,  // host_mode disables the service and runs ingress-nginx on host networking
   node_selector: error 'Must define node_selector when using host_mode',
+  service_type: 'NodePort',
 };
 
 {
@@ -11,6 +12,8 @@ local default_config = {
     ingress {
       'ingress-nginx-controller-deployment'+:
         k.apps.v1.deployment.spec.template.spec.withNodeSelectorMixin(config.node_selector),
+      'ingress-nginx-controller-service'+:
+        k.core.v1.service.spec.withType(config.service_type),
     } +
     if config.host_mode then {
       'ingress-nginx-controller-service':: super['ingress-nginx-controller-service'],
