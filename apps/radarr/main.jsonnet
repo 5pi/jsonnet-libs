@@ -11,7 +11,7 @@ local default_config = {
   image: 'lscr.io/linuxserver/radarr:'+ $.version,
   storage_size: '500Mi',
   storage_class: 'default',
-  uid: 1000,  // FIXME: This is hardcoded in the image
+  uid: 1000,
 };
 
 {
@@ -23,7 +23,10 @@ local default_config = {
       config.host,
       7878,
       namespace=config.namespace
-    ) +
+    ) + {
+    container+:     k.core.v1.container.withCommand(['/app/radarr/bin/Radarr', '--data=/config/']),
+    deployment+:    k.apps.v1.deployment.spec.template.spec.securityContext.withRunAsUser(config.uid),
+    } +
     app.withPVC(config.name, config.storage_size, '/config', config.storage_class) +
     app.withVolumeMixin(k.core.v1.volume.fromHostPath('media', config.media_path), '/media') +
     app.withFSGroup(config.uid)
