@@ -23,14 +23,14 @@ local default_config = {
   new(opts):
     local config = default_config + opts;
     {
-      [job.name + '_cronjob']: k.batch.v1beta1.cronJob.new(config.name + '-' + job.name) +
-                               k.batch.v1beta1.cronJob.metadata.withNamespace(config.namespace) +
-                               k.batch.v1beta1.cronJob.spec.withSchedule(job.schedule) +
-                               k.batch.v1beta1.cronJob.spec.jobTemplate.spec.template.spec.securityContext.withRunAsUser(config.uid) +
-                               k.batch.v1beta1.cronJob.spec.jobTemplate.spec.template.spec.withNodeSelector(config.node_selector) +
-                               k.batch.v1beta1.cronJob.spec.jobTemplate.spec.template.spec.withVolumes([k.core.v1.volume.fromHostPath('data', config.data_path)]) +
-                               k.batch.v1beta1.cronJob.spec.jobTemplate.spec.template.spec.withRestartPolicy('OnFailure') +
-                               k.batch.v1beta1.cronJob.spec.jobTemplate.spec.template.spec.withContainers([
+      [job.name + '_cronjob']: k.batch.v1.cronJob.new(config.name + '-' + job.name) +
+                               k.batch.v1.cronJob.metadata.withNamespace(config.namespace) +
+                               k.batch.v1.cronJob.spec.withSchedule(job.schedule) +
+                               k.batch.v1.cronJob.spec.jobTemplate.spec.template.spec.securityContext.withRunAsUser(config.uid) +
+                               k.batch.v1.cronJob.spec.jobTemplate.spec.template.spec.withNodeSelector(config.node_selector) +
+                               k.batch.v1.cronJob.spec.jobTemplate.spec.template.spec.withVolumes([k.core.v1.volume.fromHostPath('data', config.data_path)]) +
+                               k.batch.v1.cronJob.spec.jobTemplate.spec.template.spec.withRestartPolicy('OnFailure') +
+                               k.batch.v1.cronJob.spec.jobTemplate.spec.template.spec.withContainers([
                                  k.core.v1.container.new('job', config.image) +
                                  k.core.v1.container.withArgs(config.args + job.args) +
                                  k.core.v1.container.withVolumeMounts([
