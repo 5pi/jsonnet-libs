@@ -14,7 +14,7 @@ local default_config = {
   image: 'fish/sonarr@sha256:66dfdb71890123758b154f922825288b272531be759d27f5ca2860a9cebdd2b8',
   storage_size: '500Mi',
   storage_class: 'default',
-  uid: 1000,  // FIXME: This is hardcoded in the image
+  uid: 1000,
 };
 
 {
@@ -29,7 +29,9 @@ local default_config = {
     ) +
     app.withPVC(config.name, config.storage_size, '/data', config.storage_class) +
     app.withVolumeMixin(k.core.v1.volume.fromHostPath('media', config.media_path), '/media') +
-    app.withFSGroup(config.uid) +
+    app.withFSGroup(config.uid)  + {
+    deployment+:    k.apps.v1.deployment.spec.template.spec.securityContext.withRunAsUser(config.uid),
+    } +
     if std.extVar('include_images') == 'true' then {
       local c = [
         containerfile.from('docker.io/mono:' + config.mono_version),
