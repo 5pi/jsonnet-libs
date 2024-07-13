@@ -117,7 +117,6 @@
     ScriptPauseQueue=no
     ShellOverride=
     EventInterval=0
-    
 "kind": "ConfigMap"
 "metadata":
   "name": "nzbget-config"
