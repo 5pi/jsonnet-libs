@@ -53,6 +53,7 @@ local home_automation = fpl.stacks['home-automation'] {
     domain: domain,
     node_selector: { 'kubernetes.io/hostname': 'rpi-living' },
     mqtt_node_selector: { 'kubernetes.io/hostname': 'openwrt' },
+    mqtt_passwd: 'foo',
   },
 };
 

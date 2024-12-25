@@ -27,7 +27,6 @@ local default_config = {
                   k.core.v1.container.mixin.securityContext.withPrivileged(true) +
                   k.core.v1.container.mixin.livenessProbe.withInitialDelaySeconds(600) +
                   k.core.v1.container.mixin.livenessProbe.httpGet.withPort(8123),
-      deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector) +
-                   k.apps.v1.deployment.spec.template.spec.withHostNetwork(true),
+      deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector),
     },
 }

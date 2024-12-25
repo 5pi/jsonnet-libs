@@ -4,6 +4,9 @@
     log_dest stdout
     persistence true
     persistence_location /data/mqtt
+    listener 1883
+    allow_anonymous false
+    password_file /mosquitto/passwd/passwd
 "kind": "ConfigMap"
 "metadata":
   "name": "mqtt"

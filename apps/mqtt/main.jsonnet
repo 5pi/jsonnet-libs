@@ -7,7 +7,8 @@ local default_config = {
   node_selector: {},
   storage_path: '',
   avahi_path: '',
-  image: 'eclipse-mosquitto:1.6.7',
+  image: 'eclipse-mosquitto:2.0.20',
+  passwd: error 'Must set passwd',
 };
 
 {
@@ -27,6 +28,11 @@ local default_config = {
         {}
     )
     + app.withVolumeMixin(k.core.v1.volume.fromConfigMap('config', config.name), '/mosquitto/config') +
+    app.withVolumeMixin(
+      k.core.v1.volume.fromSecret('passwd', config.name) +
+      k.core.v1.volume.secret.withDefaultMode(std.parseOctal("600"))
+      , '/mosquitto/passwd') +
+    app.withFSGroup(1883) +
     {
       container+: k.core.v1.container.withPorts([
                     k.core.v1.containerPort.new(1883),
@@ -48,15 +54,31 @@ local default_config = {
                         </service-group>
                       |||,
                     ]) +
-                    k.core.v1.container.lifecycle.preStop.exec.withCommand(['rm', '/etc/avahi/services/mqtt.service']),
-      deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector) +
-                   k.apps.v1.deployment.spec.template.spec.withHostNetwork(true),
+                    k.core.v1.container.lifecycle.preStop.exec.withCommand(['rm', '/etc/avahi/services/mqtt.service']) else {},
+      deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector),
       configmap: k.core.v1.configMap.new(config.name, {
         'mosquitto.conf': |||
           log_dest stdout
           persistence %s
           persistence_location %s
+          listener 1883
+          allow_anonymous false
+          password_file /mosquitto/passwd/passwd
         ||| % [if config.storage_path != '' then 'true' else 'false', config.storage_path],
       }) + k.core.v1.configMap.metadata.withNamespace(config.namespace),
+      secret: k.core.v1.secret.new(config.name, {
+        'passwd': std.base64(config.passwd),
+      }) + k.core.v1.secret.metadata.withNamespace(config.namespace),
+      service:
+        k.core.v1.service.new(config.name, {name: config.name}, [
+          k.core.v1.servicePort.newNamed('mqtt', 1883, 1883),
+        ]) +
+        k.core.v1.service.metadata.withNamespace(config.namespace),
+      service_external:
+        k.core.v1.service.new(config.name + '-external', {name: config.name}, [
+          k.core.v1.servicePort.newNamed('mqtt', 1883, 1883),
+        ]) +
+        k.core.v1.service.metadata.withNamespace(config.namespace) +
+        k.core.v1.service.spec.withType('LoadBalancer'),
     },
 }

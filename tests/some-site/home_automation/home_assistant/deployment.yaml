@@ -31,7 +31,6 @@
         "volumeMounts":
         - "mountPath": "/config"
           "name": "config"
-      "hostNetwork": true
       "nodeSelector":
         "kubernetes.io/hostname": "rpi-living"
       "volumes":
