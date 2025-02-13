@@ -28,13 +28,13 @@ local newWebApp(name, image, host, containerPort, namespace='default') =
   newApp(name, image, namespace) +
   withWeb(host, containerPort);
 
-
-local withVolumeMixin(volume, mountPath, readOnly=false) = {
+local withVolumeMountsMixin(volume, volumeMounts) = {
   deployment+: k.apps.v1.deployment.spec.template.spec.withVolumesMixin(volume),
-  container+: k.core.v1.container.withVolumeMountsMixin([
-    k.core.v1.volumeMount.new(volume.name, mountPath, readOnly),
-  ]),
+  container+: k.core.v1.container.withVolumeMountsMixin(volumeMounts),
+
 };
+
+local withVolumeMixin(volume, mountPath, readOnly=false) = withVolumeMountsMixin(volume, [k.core.v1.volumeMount.new(volume.name, mountPath, readOnly)]);
 
 local withPVC(name, size, mountPath, class='default') = {
   pvc: k.core.v1.persistentVolumeClaim.new($.deployment.metadata.name) +
@@ -55,6 +55,7 @@ local withFSGroup(fsGroup) = {
   newWebApp:: newWebApp,
 
   withVolumeMixin:: withVolumeMixin,
+  withVolumeMountsMixin:: withVolumeMountsMixin,
   withWeb:: withWeb,
   withPVC:: withPVC,
   withFSGroup:: withFSGroup,
