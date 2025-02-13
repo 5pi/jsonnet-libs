@@ -5,7 +5,7 @@ local default_config = {
   name: 'home-assistant',
   namespace: 'home-assistant',
   port: 8123,
-  image: 'homeassistant/home-assistant:2023.8',
+  image: 'homeassistant/home-assistant:2024.12',
   host: 'home.example.com',
   data_path: '/data/home-assistant',
   node_selector: {},
@@ -27,6 +27,8 @@ local default_config = {
                   k.core.v1.container.mixin.securityContext.withPrivileged(true) +
                   k.core.v1.container.mixin.livenessProbe.withInitialDelaySeconds(600) +
                   k.core.v1.container.mixin.livenessProbe.httpGet.withPort(8123),
-      deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector),
+      deployment+: k.apps.v1.deployment.spec.template.spec.withNodeSelector(config.node_selector) +
+                   k.apps.v1.deployment.spec.template.spec.withHostNetwork(true) +
+                   k.apps.v1.deployment.spec.template.spec.withDnsPolicy('ClusterFirstWithHostNet'),
     },
 }
