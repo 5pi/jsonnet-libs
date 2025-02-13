@@ -1,6 +1,6 @@
 {
   blackbox_exporter: import 'blackbox_exporter/main.jsonnet',
-  home_assistant: import 'home_assistant/main.jsonnet',
+  home_assistant: import 'home_assistant/main.libsonnet',
   'ingress-nginx': import 'ingress-nginx/main.jsonnet',
   mqtt: import 'mqtt/main.jsonnet',
   node_exporter: import 'node_exporter/main.jsonnet',
@@ -10,7 +10,7 @@
   radarr: import 'radarr/main.jsonnet',
   sonarr: import 'sonarr/main.jsonnet',
   'zfs-localpv': import 'zfs-localpv/main.jsonnet',
-  zwave2mqtt: import 'zwave2mqtt/main.jsonnet',
+  zwave2mqtt: import 'zwave2mqtt/main.libsonnet',
   cert_manager: import 'cert-manager/main.jsonnet',
   fuse_device_plugin: import 'fuse-device-plugin/main.jsonnet',
   registry: import 'registry/main.libsonnet',
@@ -27,4 +27,6 @@
   alertmanager: import 'alertmanager/main.libsonnet',
   minio: import 'minio/main.libsonnet',
   prosafe_exporter: import 'prosafe-exporter/main.libsonnet',
+  zigbee2mqtt: import 'zigbee2mqtt/main.libsonnet',
+  zwave_js_ui: import 'zwave-js-ui/main.libsonnet',
 }
