@@ -6,7 +6,7 @@ local k = import 'k.libsonnet';
 local default_config = {
   name: 'shairport-sync',
   namespace: 'media',
-  version: '3.3.8',
+  version: '4.3.7',
   node_selector: {},
   image: 'mikebrady/shairport-sync:' + $.version,
 //  gid: error 'Must set gid',
