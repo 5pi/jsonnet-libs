@@ -20,7 +20,7 @@
         - "homeassistant"
         - "--config"
         - "/config"
-        "image": "homeassistant/home-assistant:2023.8"
+        "image": "homeassistant/home-assistant:2024.12"
         "livenessProbe":
           "httpGet":
             "port": 8123
@@ -31,6 +31,8 @@
         "volumeMounts":
         - "mountPath": "/config"
           "name": "config"
+      "dnsPolicy": "ClusterFirstWithHostNet"
+      "hostNetwork": true
       "nodeSelector":
         "kubernetes.io/hostname": "rpi-living"
       "volumes":
