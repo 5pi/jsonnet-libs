@@ -6,7 +6,7 @@ local default_config = {
   namespace: 'monitoring',
   port: 9100,
   uid: 1000,
-  image: 'prom/node-exporter:v1.3.1',
+  image: 'prom/node-exporter:v1.10.2',
   args: [],
 };
 

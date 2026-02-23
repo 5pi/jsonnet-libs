@@ -6,7 +6,7 @@ local default_config = {
   namespace: 'default',
   host: error 'Must define host',
   media_path: error 'Must define media_path',
-  image: 'plexinc/pms-docker:1.32.5.7349-8f4248874',
+  image: 'plexinc/pms-docker:1.41.7.9823-59f304c16',
   storage_size: '10Gi',
   storage_class: 'default',
   host_network: true,

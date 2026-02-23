@@ -28,7 +28,7 @@
           "subdir": "gen/grafonnet-latest"
         }
       },
-      "version": "d20e609202733790caf5b554c9945d049f243ae3",
+      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
       "sum": "V9vAj21qJOc2DlMPDgB1eEjSQU4A+sAA4AXuJ6bd4xc="
     },
     {
@@ -38,7 +38,7 @@
           "subdir": "gen/grafonnet-v11.4.0"
         }
       },
-      "version": "d20e609202733790caf5b554c9945d049f243ae3",
+      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
       "sum": "aVAX09paQYNOoCSKVpuk1exVIyBoMt/C50QJI+Q/3nA="
     },
     {
@@ -55,11 +55,11 @@
       "source": {
         "git": {
           "remote": "https://github.com/jsonnet-libs/k8s-libsonnet.git",
-          "subdir": "1.30"
+          "subdir": "1.35"
         }
       },
-      "version": "84aed0f9591ba86a3035e7ebe3557cb012039890",
-      "sum": "0OMrWr4xnhN5VWLXwPzCmdcENsifLNAZNzPvrHAnUAo="
+      "version": "55380470fb7979e6ce0c4316cb9c27a266caf298",
+      "sum": "vFC1i2jVvqdl0okQh5QitzH613zJwoh18TSXfoHW9CE="
     },
     {
       "source": {
@@ -68,8 +68,8 @@
           "subdir": ""
         }
       },
-      "version": "1199b50e9d2ff53d4bb5fb2304ad1fb69d38e609",
-      "sum": "LfbgcJbilu4uBdKYZSvmkoOTPwEAzg10L3/VqKAIWtA="
+      "version": "4d7f8cb24d613430799f9d56809cc6964f35cea9",
+      "sum": "hOrwkOx34tOXqoDVnwuI/Uf/dr9HFFSPWpDPOvnEGrk="
     },
     {
       "source": {
@@ -78,8 +78,8 @@
           "subdir": ""
         }
       },
-      "version": "e27267571be06c2bdc3d2fd8dbd70161cd709cb4",
-      "sum": "je1RPCp2aFNefYs5Q57Q5wDm93p8pL4pdBtA5rC7jLA="
+      "version": "f37ff27ff577940843963c92852460873d9601b1",
+      "sum": "vGAqYfQoV6QMeQl3qmae6ZbyRv6XiOuRvO2DZ7rf3pw="
     },
     {
       "source": {
@@ -88,8 +88,8 @@
           "subdir": "jsonnet/kube-state-metrics"
         }
       },
-      "version": "2a95d4649b2fea55799032fb9c0b571c4ba7f776",
-      "sum": "3bioG7CfTfY9zeu5xU4yon6Zt3kYvNkyl492nOhQxnM="
+      "version": "928d5c504f53162dda82a5865d27c3a0e73b462b",
+      "sum": "QimcNpwZcRriOp64HdmGCJuV6mzDs9FPWJ7XFnko3Yo="
     },
     {
       "source": {
@@ -98,8 +98,8 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "11365f97bef6cb0e6259d536a7e21c49e3f5c065",
-      "sum": "xYj6VYFT/eafsbleNlC+Z2VfLy1CndyYrJs9BcTmnX8="
+      "version": "b5966ca70e8c9c99afd819ce7ab75e054681673a",
+      "sum": "U5wEBBTOaDIazKOxFUu3HgOMComBUaHbkheDpMiATp4="
     }
   ],
   "legacyImports": false
