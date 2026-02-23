@@ -5,7 +5,7 @@ local default_config = {
   name: 'zwave-js-ui',
   namespace: 'home-automation',
   port: 8091,
-  image: 'zwavejs/zwave-js-ui:9.30.1',
+  image: 'zwavejs/zwave-js-ui:11.12.0',
   host: 'zwave.example.com',
   zwave_dev: '/dev/ttyACM0',
   node_selector: {},
