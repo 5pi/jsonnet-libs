@@ -3,17 +3,17 @@ local k = import 'k.libsonnet';
 
 local default_config = {
   name: 'nginx',
-  namespace: 'nginx',,
+  namespace: 'nginx',
   port: 8080,
   image: 'nginx:1.21.1-alpine',
   host: 'nginx.example.com',
   node_selector: {},
-  config: '''
-  location / {
-      auth_basic           "closed site";
-      auth_basic_user_file conf/htpasswd;
-  }
-  ''',
+  config: |||
+    location / {
+        auth_basic           "closed site";
+        auth_basic_user_file conf/htpasswd;
+    }
+  |||,
 };
 
 {
