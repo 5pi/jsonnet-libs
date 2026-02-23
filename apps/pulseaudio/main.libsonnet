@@ -9,6 +9,7 @@ local default_config = {
   alpine_version: '3.16',
   image: 'fish/pulseaudio:latest',
   dev_snd_gid: '29',
+  node_selector: {},
   config: {
     'native-tcp-anonymous.pa': |||
       .fail
