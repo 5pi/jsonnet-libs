@@ -1,0 +1,11 @@
+$extends: ../../base/service.yaml
+metadata:
+  name: nzbget
+  namespace: media
+spec:
+  selector:
+    name: nzbget
+  ports:
+  - name: http
+    port: 6789
+    targetPort: 6789

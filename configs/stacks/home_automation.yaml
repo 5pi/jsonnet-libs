@@ -1,0 +1,14 @@
+$schema: stack
+name: home_automation
+manifests:
+  - path: ../apps/home_assistant/deployment.yaml
+  - path: ../apps/home_assistant/service.yaml
+  - path: ../apps/home_assistant/ingress.yaml
+  - path: ../apps/mqtt/deployment.yaml
+  - path: ../apps/mqtt/service.yaml
+  - path: ../apps/mqtt/service_external.yaml
+  - path: ../apps/mqtt/configmap.yaml
+  - path: ../apps/mqtt/secret.yaml
+  - path: ../apps/zwave2mqtt/deployment.yaml
+  - path: ../apps/zwave2mqtt/service.yaml
+  - path: ../apps/zwave2mqtt/ingress.yaml

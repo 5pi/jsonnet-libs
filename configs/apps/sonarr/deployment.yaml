@@ -1,0 +1,33 @@
+$extends: ../../base/deployment.yaml
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  selector:
+    matchLabels:
+      name: sonarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: sonarr
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      containers:
+      - name: sonarr
+        image: fish/sonarr@sha256:66dfdb71890123758b154f922825288b272531be759d27f5ca2860a9cebdd2b8
+        volumeMounts:
+        - name: sonarr
+          mountPath: /data
+        - name: media
+          mountPath: /media
+      volumes:
+      - name: sonarr
+        persistentVolumeClaim:
+          claimName: sonarr
+      - name: media
+        hostPath:
+          path: /pool-mirror/media

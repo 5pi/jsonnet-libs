@@ -1,0 +1,21 @@
+$schema: stack
+name: ingress
+manifests:
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-clusterrole.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-clusterrolebinding.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-create-job.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-patch-job.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-role.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-rolebinding.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-serviceaccount.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-admission-validatingwebhookconfiguration.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-clusterrole.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-clusterrolebinding.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-controller-admission-service.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-controller-configmap.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-controller-deployment.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-namespace.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-role.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-rolebinding.yaml
+  - path: ../apps/ingress_nginx/ingress-nginx-serviceaccount.yaml
+  - path: ../apps/ingress_nginx/nginx-ingressclass.yaml

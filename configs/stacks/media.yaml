@@ -1,0 +1,22 @@
+$schema: stack
+name: media
+manifests:
+  - path: ../apps/plex/deployment.yaml
+  - path: ../apps/plex/service.yaml
+  - path: ../apps/plex/ingress.yaml
+  - path: ../apps/plex/pvc.yaml
+  - path: ../apps/nzbget/deployment.yaml
+  - path: ../apps/nzbget/service.yaml
+  - path: ../apps/nzbget/ingress.yaml
+  - path: ../apps/nzbget/pvc.yaml
+  - path: ../apps/nzbget/configmap.yaml
+  - path: ../apps/nzbget/image.yaml
+  - path: ../apps/sonarr/deployment.yaml
+  - path: ../apps/sonarr/service.yaml
+  - path: ../apps/sonarr/ingress.yaml
+  - path: ../apps/sonarr/pvc.yaml
+  - path: ../apps/sonarr/image.yaml
+  - path: ../apps/radarr/deployment.yaml
+  - path: ../apps/radarr/service.yaml
+  - path: ../apps/radarr/ingress.yaml
+  - path: ../apps/radarr/pvc.yaml

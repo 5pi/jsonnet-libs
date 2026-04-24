@@ -1,0 +1,40 @@
+$extends: ../../base/deployment.yaml
+metadata:
+  name: radarr
+  namespace: media
+spec:
+  selector:
+    matchLabels:
+      name: radarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: radarr
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      dnsConfig:
+        options:
+        - name: ndots
+          value: "1"
+      containers:
+      - name: radarr
+        image: lscr.io/linuxserver/radarr:5.7.0.8882-ls228
+        command:
+        - /app/radarr/bin/Radarr
+        - --data=/config/
+        volumeMounts:
+        - name: radarr
+          mountPath: /config
+        - name: media
+          mountPath: /media
+      volumes:
+      - name: radarr
+        persistentVolumeClaim:
+          claimName: radarr
+      - name: media
+        hostPath:
+          path: /pool-mirror/media

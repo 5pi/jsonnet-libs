@@ -1,0 +1,11 @@
+$extends: ../../base/service.yaml
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  selector:
+    name: sonarr
+  ports:
+  - name: http
+    port: 8989
+    targetPort: 8989

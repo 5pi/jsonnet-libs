@@ -1,0 +1,11 @@
+$extends: ../../base/pvc.yaml
+metadata:
+  name: plex
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: zfs-stripe-nvme

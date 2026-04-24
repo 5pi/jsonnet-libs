@@ -1,0 +1,28 @@
+$schema: stack
+name: monitoring
+manifests:
+  - path: ../apps/prometheus/deployment.yaml
+  - path: ../apps/prometheus/service.yaml
+  - path: ../apps/prometheus/ingress.yaml
+  - path: ../apps/prometheus/pvc.yaml
+  - path: ../apps/prometheus/configmap.yaml
+  - path: ../apps/prometheus/clusterRole.yaml
+  - path: ../apps/prometheus/clusterRoleBinding.yaml
+  - path: ../apps/prometheus/serviceAccount.yaml
+  - path: ../apps/blackbox_exporter/deployment.yaml
+  - path: ../apps/blackbox_exporter/service.yaml
+  - path: ../apps/blackbox_exporter/configmap.yaml
+  - path: ../apps/node_exporter/daemonset.yaml
+  - path: ../apps/grafana/deployment.yaml
+  - path: ../apps/grafana/service.yaml
+  - path: ../apps/grafana/ingress.yaml
+  - path: ../apps/grafana/serviceAccount.yaml
+  - path: ../apps/grafana/config.yaml
+  - path: ../apps/grafana/dashboardDatasources.yaml
+  - path: ../apps/grafana/dashboardDefinitions.yaml
+  - path: ../apps/grafana/dashboardSources.yaml
+  - path: ../apps/kube_state_metrics/deployment.yaml
+  - path: ../apps/kube_state_metrics/service.yaml
+  - path: ../apps/kube_state_metrics/clusterRole.yaml
+  - path: ../apps/kube_state_metrics/clusterRoleBinding.yaml
+  - path: ../apps/kube_state_metrics/serviceAccount.yaml

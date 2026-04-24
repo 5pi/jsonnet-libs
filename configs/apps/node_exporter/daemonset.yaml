@@ -1,0 +1,31 @@
+$extends: ../../base/daemonset.yaml
+metadata:
+  name: node-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      name: node-exporter
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: "100%"
+  template:
+    metadata:
+      labels:
+        name: node-exporter
+    spec:
+      hostNetwork: true
+      hostPID: true
+      containers:
+      - name: node-exporter
+        image: prom/node-exporter:v1.10.2
+        args:
+        - --path.rootfs=/host
+        volumeMounts:
+        - name: host
+          mountPath: /host
+          readOnly: true
+      volumes:
+      - name: host
+        hostPath:
+          path: /

@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $name
+  namespace: $namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: $name
+  template:
+    metadata:
+      labels:
+        name: $name

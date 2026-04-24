@@ -1,0 +1,11 @@
+$extends: ../../base/service.yaml
+metadata:
+  name: radarr
+  namespace: media
+spec:
+  selector:
+    name: radarr
+  ports:
+  - name: http
+    port: 7878
+    targetPort: 7878

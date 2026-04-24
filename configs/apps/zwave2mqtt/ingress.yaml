@@ -1,0 +1,16 @@
+$extends: ../../base/ingress.yaml
+metadata:
+  name: zwave2mqtt
+  namespace: home-automation
+spec:
+  rules:
+  - host: zwave.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: zwave2mqtt
+            port:
+              number: 8091

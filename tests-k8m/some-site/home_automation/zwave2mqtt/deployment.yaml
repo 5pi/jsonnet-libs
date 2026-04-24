@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zwave2mqtt
+  namespace: home-automation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: zwave2mqtt
+  template:
+    metadata:
+      labels:
+        name: zwave2mqtt
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: rpi-living
+      containers:
+        - name: zwave2mqtt
+          image: robertslando/zwave2mqtt:latest
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: dev
+              mountPath: /dev/ttyACM-zwave
+            - name: data
+              mountPath: /usr/src/app/store
+      volumes:
+        - name: dev
+          hostPath:
+            path: /dev/ttyACM0
+        - name: data
+          hostPath:
+            path: /data/zwave2mqtt

@@ -1,0 +1,25 @@
+$extends: ../../base/deployment.yaml
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      name: blackbox-exporter
+  template:
+    metadata:
+      labels:
+        name: blackbox-exporter
+    spec:
+      containers:
+      - name: blackbox-exporter
+        image: prom/blackbox-exporter:v0.23.0
+        args:
+        - --config.file=/blackbox-exporter/config.yaml
+        volumeMounts:
+        - name: config
+          mountPath: /blackbox-exporter
+      volumes:
+      - name: config
+        configMap:
+          name: blackbox-exporter

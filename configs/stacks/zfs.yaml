@@ -1,0 +1,28 @@
+$schema: stack
+name: zfs
+manifests:
+  - path: ../apps/operator/openebs-namespace.yaml
+  - path: ../apps/operator/openebs-zfs-controller-sa-serviceaccount.yaml
+  - path: ../apps/operator/openebs-zfs-controller-statefulset.yaml
+  - path: ../apps/operator/openebs-zfs-csi-controller-critical-priorityclass.yaml
+  - path: ../apps/operator/openebs-zfs-csi-node-critical-priorityclass.yaml
+  - path: ../apps/operator/openebs-zfs-driver-registrar-binding-clusterrolebinding.yaml
+  - path: ../apps/operator/openebs-zfs-driver-registrar-role-clusterrole.yaml
+  - path: ../apps/operator/openebs-zfs-node-daemonset.yaml
+  - path: ../apps/operator/openebs-zfs-node-sa-serviceaccount.yaml
+  - path: ../apps/operator/openebs-zfs-provisioner-binding-clusterrolebinding.yaml
+  - path: ../apps/operator/openebs-zfs-provisioner-role-clusterrole.yaml
+  - path: ../apps/operator/openebs-zfs-snapshotter-binding-clusterrolebinding.yaml
+  - path: ../apps/operator/openebs-zfs-snapshotter-role-clusterrole.yaml
+  - path: ../apps/operator/openebs-zfspv-bin-configmap.yaml
+  - path: ../apps/operator/volumesnapshotclasses.snapshot.storage.k8s.io-customresourcedefinition.yaml
+  - path: ../apps/operator/volumesnapshotcontents.snapshot.storage.k8s.io-customresourcedefinition.yaml
+  - path: ../apps/operator/volumesnapshots.snapshot.storage.k8s.io-customresourcedefinition.yaml
+  - path: ../apps/operator/zfs.csi.openebs.io-csidriver.yaml
+  - path: ../apps/operator/zfsbackups.zfs.openebs.io-customresourcedefinition.yaml
+  - path: ../apps/operator/zfsnodes.zfs.openebs.io-customresourcedefinition.yaml
+  - path: ../apps/operator/zfsrestores.zfs.openebs.io-customresourcedefinition.yaml
+  - path: ../apps/operator/zfssnapshots.zfs.openebs.io-customresourcedefinition.yaml
+  - path: ../apps/operator/zfsvolumes.zfs.openebs.io-customresourcedefinition.yaml
+  - path: ../apps/storage_classes/mirror.yaml
+  - path: ../apps/storage_classes/stripe-nvme.yaml

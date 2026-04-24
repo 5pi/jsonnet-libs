@@ -1,0 +1,41 @@
+#!/bin/bash
+# test-k8m — render all k8m stacks and verify output hasn't changed.
+#
+# First run (or after updating configs): generate golden files and commit them.
+# Subsequent runs: regenerate and assert git-clean.
+#
+# Set COMPARE_JSONNET=1 to also verify semantic equivalence with the jsonnet golden output.
+
+set -euo pipefail
+
+K8M=${K8M:-k8m}
+OUTDIR=tests-k8m/some-site
+STACKS=(
+  configs/stacks/home_automation.yaml
+  configs/stacks/media.yaml
+  configs/stacks/monitoring.yaml
+  configs/stacks/zfs.yaml
+  configs/stacks/ingress.yaml
+)
+
+# Render all stacks.
+rm -rf "$OUTDIR"
+for stack in "${STACKS[@]}"; do
+  echo "Rendering $stack..."
+  "$K8M" render "$stack" -o "$OUTDIR"
+done
+
+echo ""
+echo "Generated $(find "$OUTDIR" -name '*.yaml' | wc -l | tr -d ' ') files in $OUTDIR"
+
+# Optionally compare semantically against the jsonnet golden output.
+if [[ "${COMPARE_JSONNET:-}" == "1" ]]; then
+  echo ""
+  echo "Comparing with jsonnet output..."
+  ${K8M}-compare tests/some-site "$OUTDIR"
+fi
+
+# Assert git-clean (no changes to committed golden files).
+echo ""
+git diff --exit-code "$OUTDIR"
+echo "test-k8m: PASSED"

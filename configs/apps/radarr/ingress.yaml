@@ -1,0 +1,16 @@
+$extends: ../../base/ingress.yaml
+metadata:
+  name: radarr
+  namespace: media
+spec:
+  rules:
+  - host: radarr.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: radarr
+            port:
+              number: 7878

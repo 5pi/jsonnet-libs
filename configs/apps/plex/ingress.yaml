@@ -1,0 +1,16 @@
+$extends: ../../base/ingress.yaml
+metadata:
+  name: plex
+  namespace: default
+spec:
+  rules:
+  - host: plex.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: plex
+            port:
+              number: 32400

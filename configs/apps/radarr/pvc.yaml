@@ -1,0 +1,11 @@
+$extends: ../../base/pvc.yaml
+metadata:
+  name: radarr
+  namespace: media
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+  storageClassName: zfs-stripe-nvme
