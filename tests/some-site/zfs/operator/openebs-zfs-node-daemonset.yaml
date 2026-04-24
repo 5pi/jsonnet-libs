@@ -64,7 +64,7 @@
           "value": "agent"
         - "name": "OPENEBS_NAMESPACE"
           "value": "openebs"
-        "image": "openebs/zfs-driver:2.9.0"
+        "image": "openebs/zfs-driver:2.9.1"
         "imagePullPolicy": "IfNotPresent"
         "name": "openebs-zfs-plugin"
         "securityContext":
