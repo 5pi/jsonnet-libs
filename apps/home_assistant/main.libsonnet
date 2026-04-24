@@ -5,7 +5,7 @@ local default_config = {
   name: 'home-assistant',
   namespace: 'home-assistant',
   port: 8123,
-  image: 'homeassistant/home-assistant:2026.2',
+  image: 'homeassistant/home-assistant:2026.4.0',
   host: 'home.example.com',
   data_path: '/data/home-assistant',
   node_selector: {},
