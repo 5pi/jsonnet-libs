@@ -2,6 +2,7 @@
   blackbox_exporter: import 'blackbox_exporter/main.jsonnet',
   home_assistant: import 'home_assistant/main.libsonnet',
   'ingress-nginx': import 'ingress-nginx/main.jsonnet',
+  jellyfin: import 'jellyfin/main.jsonnet',
   mqtt: import 'mqtt/main.jsonnet',
   node_exporter: import 'node_exporter/main.jsonnet',
   nzbget: import 'nzbget/main.jsonnet',

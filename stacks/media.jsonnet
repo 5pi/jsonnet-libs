@@ -23,6 +23,12 @@
       storage_class: $._config.storage_class,
       media_path: $._config.media_path,
     },
+    jellyfin: {
+      namespace: $._config.namespace,
+      host: 'jellyfin.' + $._config.domain,
+      storage_class: $._config.storage_class,
+      media_path: $._config.media_path,
+    },
   },
 
   plex: (import '../apps/plex/main.jsonnet').new({
@@ -41,4 +47,5 @@
 
   sonarr: (import '../apps/sonarr/main.jsonnet').new($._config.sonarr),
   radarr: (import '../apps/radarr/main.jsonnet').new($._config.radarr),
+  jellyfin: (import '../apps/jellyfin/main.jsonnet').new($._config.jellyfin),
 }

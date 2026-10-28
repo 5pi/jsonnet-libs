@@ -28,18 +28,18 @@
           "subdir": "gen/grafonnet-latest"
         }
       },
-      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
-      "sum": "V9vAj21qJOc2DlMPDgB1eEjSQU4A+sAA4AXuJ6bd4xc="
+      "version": "8de2f3c83a38f68085c239df979f57d8dfdb7588",
+      "sum": "djejYCGNdtWsAd39+cHU1QNBIUKePhUyY4QNZt7XO4o="
     },
     {
       "source": {
         "git": {
           "remote": "https://github.com/grafana/grafonnet.git",
-          "subdir": "gen/grafonnet-v11.4.0"
+          "subdir": "gen/grafonnet-v13.0.0"
         }
       },
-      "version": "7380c9c64fb973f34c3ec46265621a2b0dee0058",
-      "sum": "aVAX09paQYNOoCSKVpuk1exVIyBoMt/C50QJI+Q/3nA="
+      "version": "8de2f3c83a38f68085c239df979f57d8dfdb7588",
+      "sum": "hZfIVja9O6czp3Pg8fzqmN891FLz8nPvy2IJND5qlGw="
     },
     {
       "source": {
@@ -58,7 +58,7 @@
           "subdir": "1.35"
         }
       },
-      "version": "ee5c4c5ee02571eaf82f1170c60af47eee5496be",
+      "version": "f66023fcddc92e89c3e81bd49c1f528a984505ef",
       "sum": "B+1kudlxnkbH6warwOHHh+gmADl2w5VFJQ5D0SxcO6M="
     },
     {
@@ -78,8 +78,8 @@
           "subdir": ""
         }
       },
-      "version": "adbf3ac6f5d5326e55b2c89c440487692ae002e7",
-      "sum": "ZT/0sbdEHRzL8EvVwG6ZbuY97OQg668LEChcBjeOMQs="
+      "version": "ea8e318e706c0c14fe857e9b0182f6b7e0564e88",
+      "sum": "AXxs+GkEMTDptfGUv3lmmdlWB8QV4Z3y68T5XrQDHnw="
     },
     {
       "source": {
@@ -88,8 +88,8 @@
           "subdir": "jsonnet/kube-state-metrics"
         }
       },
-      "version": "5b34f3a6b5a22821f5d7a002613fc880db699665",
-      "sum": "xIGXvJMF+93uRKuI5oEoZGOBT3wG9PwzlXmGhOZF0zg="
+      "version": "e85f0939ebba923be86a63f59fe1f514629e8a2a",
+      "sum": "hjMwDkqhCItPdK3j9OARdKp7iMb+2D1vMYCIJbH7AVk="
     },
     {
       "source": {
@@ -98,7 +98,7 @@
           "subdir": "docs/node-mixin"
         }
       },
-      "version": "30bbe2c92da5776cc2c0ef5baab8b1b84a6c9c75",
+      "version": "32d5bccdaff4ede0b0412af4536ce83ee7ab5f6e",
       "sum": "PGx1okd1Ny4U+Ma3AV0haZWvXnX8eJBN4+BsQInWUo4="
     }
   ],

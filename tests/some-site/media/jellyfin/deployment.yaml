@@ -1,0 +1,40 @@
+"apiVersion": "apps/v1"
+"kind": "Deployment"
+"metadata":
+  "name": "jellyfin"
+  "namespace": "media"
+"spec":
+  "replicas": 1
+  "selector":
+    "matchLabels":
+      "name": "jellyfin"
+  "strategy":
+    "type": "Recreate"
+  "template":
+    "metadata":
+      "labels":
+        "name": "jellyfin"
+    "spec":
+      "containers":
+      - "env": []
+        "image": "lscr.io/linuxserver/jellyfin:10.11.11ubu2404-ls38"
+        "name": "jellyfin"
+        "volumeMounts":
+        - "mountPath": "/config"
+          "name": "jellyfin"
+        - "mountPath": "/media"
+          "name": "media"
+        - "mountPath": "/config/cache"
+          "name": "cache"
+      "securityContext":
+        "fsGroup": 1000
+        "runAsUser": 1000
+      "volumes":
+      - "name": "jellyfin"
+        "persistentVolumeClaim":
+          "claimName": "jellyfin"
+      - "hostPath":
+          "path": "/pool-mirror/media"
+        "name": "media"
+      - "emptyDir": {}
+        "name": "cache"

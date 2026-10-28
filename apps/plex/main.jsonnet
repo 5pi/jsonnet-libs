@@ -41,7 +41,8 @@ local ports = {
           k.core.v1.containerPort.new(ports[name].port) +
           if 'protocol' in ports[name] then k.core.v1.containerPort.withProtocol(ports[name].protocol) else {}
           for name in std.objectFields(ports)
-        ]) + k.core.v1.container.withEnv(config.env),
+        ]) + k.core.v1.container.withEnv(config.env) +
+        k.core.v1.container.resources.withLimits({ memory: '8Gi' }),
       deployment+: k.apps.v1.deployment.spec.template.spec.withHostNetwork(config.host_network) +
                    k.apps.v1.deployment.spec.template.spec.withHostname(config.hostname) +
                    k.apps.v1.deployment.spec.strategy.withType('Recreate'),
